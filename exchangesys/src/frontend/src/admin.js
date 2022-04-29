@@ -4,7 +4,7 @@ import Vue from 'vue/dist/vue.js';
 import VueRouter from'vue-router'
 import { routes } from './routes';
 import axios from 'axios'
-import App from './components/auth/signup.vue'
+
 
 // Sweet Alert start
 import Swal from 'sweetalert2'
@@ -38,8 +38,8 @@ Vue.prototype.$axios = axios
 
 /* eslint-disable */
 const app=new Vue({
-  el: '#app',
+  el: '#app1',
   router,
- render: h => h(App)
+
 })
 /* eslint-disable */
