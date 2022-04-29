@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 
+
+    <title>Exchange</title>
+  </head>
+  <body class="bg-transparent">
+
+    <div id="app">
+        <nav class="nav">
+            <div class="dropdown">
+                    <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
+                        <span class="logged-name"><i class="menu-item-icon icon ion-ios-gear-outline tx-30"></i> </span>
+                        
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-header wd-200">
+                        <ul class="list-unstyled user-profile-nav">
+                                   <router-link to="/logout" style=" padding-right: 35px;" ><i class="icon ion-power"></i> Sign Out</router-link>
+                 </ul>
+                    </div><!-- dropdown-menu -->
+                </div><!-- dropdown -->
+
+           
+            
+              </nav>
+     
+                                           
+              <router-link to="/logout" ><i class="btn btn-sm btn-warning"></i>Sing out</router-link>
+                                           
+              <router-view class="logout"></router-view>
+  
+    </div>
+ 
+
+  </body>
+</html>
