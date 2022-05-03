@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.GenerationType.AUTO;
@@ -26,6 +27,9 @@ public class User {
     private Integer age;
     private String password;
     private Integer Role;
+    
+    @OneToMany(mappedBy = "user")
+    private List<Service> services;
 
     public Long getId() {
         return id;
