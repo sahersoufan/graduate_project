@@ -42,7 +42,7 @@
             <div class="container-fluid p-0">
               <div class="row no-gutters">
                 <div class="col-lg-6 order-2 order-lg-1">
-                  <div class="timeline-bg-content bg-img"><img src="assets/images/timeline/adda-timeline.jpg">
+                  <div class="timeline-bg-content bg-img"><img src="../../assets/images/timeline/adda-timeline.jpg">
                     <h3 class="timeline-bg-title">Let’s see what’s happening to you and your world. Welcome in Adda.</h3>
                   </div>
                 </div>
@@ -143,12 +143,12 @@ const Toast = Swal.mixin({
                     if(res.data==="islog"){
                         console.log("islog",res.data)  ; 
                      if(Cookies.get('name')==="user"){
-                         window.location.href="user/home.html"
+                         window.location.href="user/home"
 
 
                      }
                       if(Cookies.get('name')==="admin"){
-                          window.location.href="admin/home.html"
+                          window.location.href="admin/home"
 
                      }
                     }                 
@@ -209,9 +209,9 @@ const Toast = Swal.mixin({
                             title: "success login"
                })
                if(json.auth==="user"){
-                  window.location.href="user/home.html"
+                  window.location.href="user/home"
                }else{
-                  window.location.href="admin/home.html"
+                  window.location.href="admin/dashboard"
                }
     
              

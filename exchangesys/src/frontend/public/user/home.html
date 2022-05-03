@@ -37,7 +37,8 @@
 
 <body>
 
-    <div id="app">
+<div id="app1">
+    
     <!-- header area start -->
     <header>
         <div class="header-top sticky bg-white d-none d-lg-block">
@@ -224,50 +225,31 @@
                     </div>
 
                     <div class="col-md-2">
-                        <!-- brand logo start -->
-                        <div class="brand-logo text-center">
-                           
-                        </div>
-                        <!-- brand logo end -->
+                      
                     </div>
 
                     <div class="col-md-5">
                         <div class="header-top-right d-flex align-items-center justify-content-end">
                             <!-- header top search start -->
-                            <div class="header-top-search">
-                                <form class="top-search-box">
-                                    <input type="text" placeholder="Search" class="top-search-field">
-                                    <button class="top-search-btn"><i class="flaticon-search"></i></button>
-                                </form>
-                            </div>
+                           
                             <!-- header top search end -->
-
+                            
                             <!-- profile picture start -->
                             <div class="profile-setting-box">
-                                <div class="profile-thumb-small">
-                                    <a href="javascript:void(0)" class="profile-triger">
-                                        <figure>
-                                            <img src="../assets/images/profile/profile-small-1.jpg" alt="profile picture">
-                                        </figure>
-                                    </a>
-                                    <div class="profile-dropdown">
-                                        <div class="profile-head">
-                                            <h5 class="name"><a href="#">Madison Howard</a></h5>
-                                            <a class="mail" href="#">mailnam@mail.com</a>
-                                        </div>
-                                        <div class="profile-body">
-                                            <ul>
-                                                <li><a href="profile.html"><i class="flaticon-user"></i>Profile</a></li>
-                                                <li><a href="#"><i class="flaticon-message"></i>Inbox</a></li>
-                                                <li><a href="#"><i class="flaticon-document"></i>Activity</a></li>
-                                            </ul>
-                                            <ul>
-                                                <li><a href="#"><i class="flaticon-settings"></i>Setting</a></li>
-                                                <li><router-link to="/logout" ><i class="flaticon-unlock"></i>Sing out</router-link></li>
-                                            </ul>
-                                        </div>
+                                <div class="post-settings-bar">
+                                    <figure>
+                                        <img src="../assets/images/profile/profile-small-1.jpg"  style="border-radius: 50%;  width: 60%;   margin-left: 20px;"alt="Avatar">
+                                    </figure>
+                                    <div class="post-settings ">
+                                        <ul>
+                                            <li><button>copy link to adda</button></li>
+                                            <li><button>edit post</button></li>
+                                            <li><button>embed adda</button></li>
+                                            <li><router-link to="/logout" ><i class="flaticon-unlock"></i>Sing out</router-link></li>
+                                       
+                                        </ul>
                                     </div>
-                                </div>
+                                </div> 
                             </div>
                             <!-- profile picture end -->
                         </div>
@@ -276,7 +258,7 @@
             </div>
         </div>
     </header>
-    <router-view></router-view>
+   
     <!-- header area end -->
     <!-- header area start -->
     <header>
@@ -443,7 +425,7 @@
                                 </ul>
                                 <ul>
                                     <li><a href="#"><i class="flaticon-settings"></i>Setting</a></li>
-                                    <li><a href="signup.html"><i class="flaticon-unlock"></i>Sing out</a></li>
+                                    <li><router-link to="/logout" ><i class="flaticon-unlock"></i>Sing out</router-link></li>
                                 </ul>
                             </div>
                         </div>
@@ -454,7 +436,7 @@
         </div>
     </header>
     <!-- header area end -->
-
+    <router-view class="logout"></router-view>
     <main>
 
         <div class="main-wrapper">
@@ -1181,10 +1163,20 @@
         </div>
     </footer>
     <!-- footer area end -->
-
+</div>
     <!-- JS
 ============================================ -->
+<script type="module" src="../assets/js.cookie.mjs"></script>
+<script type="module">
+  import Cookies from '../assets/js.cookie.mjs'
 
+ var name= Cookies.get('access_token')
+ console.log("coookie",name)
+ if(!Cookies.get('access_token')){
+    window.location.href="/"  
+ }
+</script>
+  
     <!-- Modernizer JS -->
     <script src="../assets/js/vendor/modernizr-3.6.0.min.js"></script>
     <!-- jQuery JS -->
@@ -1209,7 +1201,7 @@
     <script src="../assets/js/plugins/isotope.pkgd.min.js"></script>
     <!-- Main JS -->
     <script src="../assets/js/main.js"></script>
-</div>
+
 </body>
 
 </html>
