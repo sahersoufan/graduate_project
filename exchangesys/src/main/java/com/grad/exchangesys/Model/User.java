@@ -66,6 +66,9 @@ public class User {
     }
 
 
+    @OneToMany(mappedBy = "user")
+    private List<Service> services;
+
     public Long getId() {
         return id;
     }
