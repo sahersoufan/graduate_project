@@ -183,7 +183,7 @@ const Toast = Swal.mixin({
     },
     login(){
     
-
+ const _this= this;  
     const myForm = document.getElementById('form');
 
 
@@ -203,12 +203,17 @@ const Toast = Swal.mixin({
             Cookies.set('access_token', json.access_token, { path: '/' })
             Cookies.set('refresh_token', json.refresh_token, { path: '/' })
             Cookies.set('name', json.auth, { path: '/' })
+               Cookies.set('user', json.name, { path: '/' })
            
                Toast.fire({
                             icon: 'success',
                             title: "success login"
                })
                if(json.auth==="user"){
+                   
+                //   _this.$router.replace("/user/").catch(()=>{console.log("hhhhh")});
+                 //  location.reload(); 
+                  /// console.log( _this.$router.push({  path: '/user/'})   )
                   window.location.href="user/home"
                }else{
                   window.location.href="admin/dashboard"

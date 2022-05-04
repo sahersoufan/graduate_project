@@ -31,7 +31,8 @@
     <link rel="stylesheet" href="../assets/css/plugins/lightgallery.min.css">
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="../assets/css/style.css">
- 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 </head>
 
@@ -49,7 +50,8 @@
                         <div class="header-top-navigation">
                             <nav>
                                 <ul>
-                                    <li class="active"><a href="index.html">home</a></li>
+                                    <li ><router-link id="myCheck" to="/user" >home</router-link></li>
+                                 
                                     <li class="msg-trigger"><a class="msg-trigger-btn" href="#a">message</a>
                                         <div class="message-dropdown" id="a">
                                             <div class="dropdown-title">
@@ -218,6 +220,7 @@
                                             </div>
                                         </div>
                                     </li>
+                                   
                                 </ul>
                             </nav>
                         </div>
@@ -231,7 +234,12 @@
                     <div class="col-md-5">
                         <div class="header-top-right d-flex align-items-center justify-content-end">
                             <!-- header top search start -->
-                           
+                            <div class="header-top-search">
+                                <form class="top-search-box">
+                                    <input type="text" placeholder="Search" class="top-search-field">
+                                    <button class="top-search-btn"><i class="flaticon-search"></i></button>
+                                </form>
+                            </div>
                             <!-- header top search end -->
                             
                             <!-- profile picture start -->
@@ -261,497 +269,10 @@
    
     <!-- header area end -->
     <!-- header area start -->
-    <header>
-        <div class="mobile-header-wrapper sticky d-block d-lg-none">
-            <div class="mobile-header position-relative ">
-               
-                <div class="mobile-menu w-100">
-                    <ul>
-                        <li>
-                            <button class="notification request-trigger"><i class="flaticon-users"></i>
-                                <span>03</span>
-                            </button>
-                            <ul class="frnd-request-list">
-                                <li>
-                                    <div class="frnd-request-member">
-                                        <figure class="request-thumb">
-                                            <a href="profile.html">
-                                                <img src="../assets/images/profile/profile-midle-1.jpg" alt="proflie author">
-                                            </a>
-                                        </figure>
-                                        <div class="frnd-content">
-                                            <h6 class="author"><a href="profile.html">merry watson</a></h6>
-                                            <p class="author-subtitle">Works at HasTech</p>
-                                            <div class="request-btn-inner">
-                                                <button class="frnd-btn">confirm</button>
-                                                <button class="frnd-btn delete">delete</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="frnd-request-member">
-                                        <figure class="request-thumb">
-                                            <a href="profile.html">
-                                                <img src="assets/images/profile/profile-midle-2.jpg" alt="proflie author">
-                                            </a>
-                                        </figure>
-                                        <div class="frnd-content">
-                                            <h6 class="author"><a href="profile.html">merry watson</a></h6>
-                                            <p class="author-subtitle">Works at HasTech</p>
-                                            <div class="request-btn-inner">
-                                                <button class="frnd-btn">confirm</button>
-                                                <button class="frnd-btn delete">delete</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="frnd-request-member">
-                                        <figure class="request-thumb">
-                                            <a href="profile.html">
-                                                <img src="assets/images/profile/profile-midle-3.jpg" alt="proflie author">
-                                            </a>
-                                        </figure>
-                                        <div class="frnd-content">
-                                            <h6 class="author"><a href="profile.html">merry watson</a></h6>
-                                            <p class="author-subtitle">Works at HasTech</p>
-                                            <div class="request-btn-inner">
-                                                <button class="frnd-btn">confirm</button>
-                                                <button class="frnd-btn delete">delete</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <button class="notification"><i class="flaticon-notification"></i>
-                                <span>03</span>
-                            </button>
-                        </li>
-                        <li>
-                            <button class="chat-trigger notification"><i class="flaticon-chats"></i>
-                                <span>04</span>
-                            </button>
-                            <div class="mobile-chat-box">
-                                <div class="live-chat-title">
-                                    <!-- profile picture end -->
-                                    <div class="profile-thumb">
-                                        <a href="profile.html">
-                                            <figure class="profile-thumb-small profile-active">
-                                                <img src="../assets/images/profile/profile-small-15.jpg" alt="profile picture">
-                                            </figure>
-                                        </a>
-                                    </div>
-                                    <!-- profile picture end -->
-                                    <div class="posted-author">
-                                        <h6 class="author"><a href="profile.html">Robart Marloyan</a></h6>
-                                        <span class="active-pro">active now</span>
-                                    </div>
-                                    <div class="live-chat-settings ml-auto">
-                                        <button class="chat-settings"><img src="assets/images/icons/settings.png" alt=""></button>
-                                        <button class="close-btn"><img src="assets/images/icons/close.png" alt=""></button>
-                                    </div>
-                                </div>
-                                <div class="message-list-inner">
-                                    <ul class="message-list custom-scroll">
-                                        <li class="text-friends">
-                                            <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text</p>
-                                            <div class="message-time">10 minute ago</div>
-                                        </li>
-                                        <li class="text-author">
-                                            <p>Many desktop publishing packages and web page editors</p>
-                                            <div class="message-time">5 minute ago</div>
-                                        </li>
-                                        <li class="text-friends">
-                                            <p>packages and web page editors </p>
-                                            <div class="message-time">2 minute ago</div>
-                                        </li>
-                                        <li class="text-friends">
-                                            <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text</p>
-                                            <div class="message-time">10 minute ago</div>
-                                        </li>
-                                        <li class="text-author">
-                                            <p>Many desktop publishing packages and web page editors</p>
-                                            <div class="message-time">5 minute ago</div>
-                                        </li>
-                                        <li class="text-friends">
-                                            <p>packages and web page editors </p>
-                                            <div class="message-time">2 minute ago</div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="chat-text-field mob-text-box">
-                                    <textarea class="live-chat-field custom-scroll" placeholder="Text Message"></textarea>
-                                    <button class="chat-message-send" type="submit" value="submit">
-                                        <img src="../assets/images/icons/plane.png" alt="">
-                                    </button>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <button class="search-trigger">
-                                <i class="search-icon flaticon-search"></i>
-                                <i class="close-icon flaticon-cross-out"></i>
-                            </button>
-                            <div class="mob-search-box">
-                                <form class="mob-search-inner">
-                                    <input type="text" placeholder="Search Here" class="mob-search-field">
-                                    <button class="mob-search-btn"><i class="flaticon-search"></i></button>
-                                </form>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="mobile-header-profile">
-                    <!-- profile picture end -->
-                    <div class="profile-thumb profile-setting-box">
-                        <a href="javascript:void(0)" class="profile-triger">
-                            <figure class="profile-thumb-middle">
-                                <img src="../assets/images/profile/profile-small-1.jpg" alt="profile picture">
-                            </figure>
-                        </a>
-                        <div class="profile-dropdown text-left">
-                            <div class="profile-head">
-                                <h5 class="name"><a href="#">Madison Howard</a></h5>
-                                <a class="mail" href="#">mailnam@mail.com</a>
-                            </div>
-                            <div class="profile-body">
-                                <ul>
-                                    <li><a href="profile.html"><i class="flaticon-user"></i>Profile</a></li>
-                                    <li><a href="#"><i class="flaticon-message"></i>Inbox</a></li>
-                                    <li><a href="#"><i class="flaticon-document"></i>Activity</a></li>
-                                </ul>
-                                <ul>
-                                    <li><a href="#"><i class="flaticon-settings"></i>Setting</a></li>
-                                    <li><router-link to="/logout" ><i class="flaticon-unlock"></i>Sing out</router-link></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- profile picture end -->
-                </div>
-            </div>
-        </div>
-    </header>
+ 
     <!-- header area end -->
-    <router-view class="logout"></router-view>
-    <main>
-
-        <div class="main-wrapper">
-            <!-- profile banner area start -->
-            <div class="profile-banner-large bg-img" data-bg="../assets/images/banner/profile-banner.jpg">
-            </div>
-            <!-- profile banner area end -->
-
-            <!-- profile menu area start -->
-            <div class="profile-menu-area secondary-navigation-style bg-white">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-3 col-md-3">
-                            <div class="profile-picture-box">
-                                <figure class="profile-picture">
-                                    <a href="profile.html">
-                                        <img src="../assets/images/profile/profile-1.jpg" alt="profile picture">
-                                    </a>
-                                </figure>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 offset-lg-1">
-                            <div class="profile-menu-wrapper">
-                                <div class="main-menu-inner header-top-navigation">
-                                    <nav>
-                                        <ul class="main-menu">
-                                            <li class="active"><a href="#">timeline</a></li>
-                                            <li><a href="about.html">about</a></li>
-                                            
-                                            <li><a href="about.html">more</a></li>
-                                            <!-- <li class="d-inline-block d-md-none"><a href="profile.html">edit profile</a></li> -->
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-3 d-none d-md-block">
-                            <div class="profile-edit-panel">
-                                <button class="edit-btn">edit profile</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- profile menu area end -->
-
-            <!-- sendary menu start -->
-            <div class="menu-secondary">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="secondary-menu-wrapper bg-white">
-                                <div class="page-title-inner">
-                                    <h4 class="page-title">about</h4>
-                                </div>
-                                <div class="main-menu-inner header-top-navigation">
-                                    <nav>
-                                        <ul class="main-menu">
-                                            <li><a href="#"><span>facebook</span> <i class="flaticon-facebook"></i></a></li>
-                                            <li><a href="#"><span>twitter</span> <i class="flaticon-twitter-logo-silhouette"></i></a></li>
-                                            <li><a href="#"><span>google</span> <i class="flaticon-google-plus"></i></a></li>
-                                            <li><a href="#"><span>pinterest</span> <i class="flaticon-pinterest"></i></a></li>
-                                            <!-- <li class="d-inline-block d-md-none"><a href="profile.html">edit profile</a></li> -->
-                                        </ul>
-                                    </nav>
-                                </div>
-                                <div class="post-settings-bar">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <div class="post-settings arrow-shape">
-                                        <ul>
-                                            <li><button>edit profile</button></li>
-                                            <li><button>activity log</button></li>
-                                            
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- sendary menu end -->
-
-            <!-- about author details start -->
-            <div class="about-author-details">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <div class="card widget-item">
-                                <div class="about-me">
-                                    <ul class="nav flex-column about-author-menu">
-                                        <li><a href="#one" data-toggle="tab" class="active">Something About Me</a></li>
-                                        <li><a href="#two" data-toggle="tab">Working Zone</a></li>
-                                        <li><a href="#three" data-toggle="tab">Educational Qualification</a></li>
-                                        <li><a href="#four" data-toggle="tab">Work & Education</a></li>
-                                        <li><a href="#five" data-toggle="tab">Friends & Family</a></li>
-                                        <li><a href="#six" data-toggle="tab">Contact Details</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-9">
-                            <div class="about-description">
-                                <div class="tab-content">
-                                    <div class="tab-pane fade active show" id="one">
-                                        <div class="work-zone">
-                                            <div class="author-desc-title d-flex">
-                                                <h6 class="author"><a href="profile.html">Mili Raoulin</a></h6>
-                                                <div class="post-settings-bar">
-                                                    <span></span>
-                                                    <span></span>
-                                                    <span></span>
-                                                    <div class="post-settings arrow-shape">
-                                                        <ul>
-                                                            <li><button>copy link to adda</button></li>
-                                                            <li><button>edit post</button></li>
-                                                            <li><button>embed adda</button></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
-                                            <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search</p>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="two">
-                                        <div class="work-zone">
-                                            <div class="author-desc-title d-flex">
-                                                <h6 class="author"><a href="profile.html">Mili Raoulin</a></h6>
-                                                <div class="post-settings-bar">
-                                                    <span></span>
-                                                    <span></span>
-                                                    <span></span>
-                                                    <div class="post-settings arrow-shape">
-                                                        <ul>
-                                                            <li><button>copy link to adda</button></li>
-                                                            <li><button>edit post</button></li>
-                                                          
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
-                                            <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search</p>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="three">
-                                        <div class="work-zone">
-                                            <div class="author-desc-title d-flex">
-                                                <h6 class="author"><a href="profile.html">Mili Raoulin</a></h6>
-                                                <div class="post-settings-bar">
-                                                    <span></span>
-                                                    <span></span>
-                                                    <span></span>
-                                                    <div class="post-settings arrow-shape">
-                                                        <ul>
-                                                            <li><button>copy link to adda</button></li>
-                                                            <li><button>edit post</button></li>
-                                                            <li><button>embed adda</button></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
-                                            <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search</p>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="four">
-                                        <div class="work-zone">
-                                            <div class="author-desc-title d-flex">
-                                                <h6 class="author"><a href="profile.html">Mili Raoulin</a></h6>
-                                                <div class="post-settings-bar">
-                                                    <span></span>
-                                                    <span></span>
-                                                    <span></span>
-                                                    <div class="post-settings arrow-shape">
-                                                        <ul>
-                                                            <li><button>copy link to adda</button></li>
-                                                            <li><button>edit post</button></li>
-                                                            <li><button>embed adda</button></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
-                                            <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search</p>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="five">
-                                        <div class="work-zone">
-                                            <div class="author-desc-title d-flex">
-                                                <h6 class="author"><a href="profile.html">Mili Raoulin</a></h6>
-                                                <div class="post-settings-bar">
-                                                    <span></span>
-                                                    <span></span>
-                                                    <span></span>
-                                                    <div class="post-settings arrow-shape">
-                                                        <ul>
-                                                            <li><button>copy link to adda</button></li>
-                                                            <li><button>edit post</button></li>
-                                                            <li><button>embed adda</button></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
-                                            <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search</p>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="six">
-                                        <div class="work-zone">
-                                            <div class="author-desc-title d-flex">
-                                                <h6 class="author"><a href="profile.html">Mili Raoulin</a></h6>
-                                                <div class="post-settings-bar">
-                                                    <span></span>
-                                                    <span></span>
-                                                    <span></span>
-                                                    <div class="post-settings arrow-shape">
-                                                        <ul>
-                                                            <li><button>copy link to adda</button></li>
-                                                            <li><button>edit post</button></li>
-                                                            <li><button>embed adda</button></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
-                                            <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- about author details start -->
-
-      
-
-        
-
-        
-
-            <!-- favorite book section start -->
-            <div class="faborite-books">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="content-box">
-                                <h5 class="content-title">Previous Work</h5>
-                                <div class="content-body">
-                                    <div class="row favorite-item-carousel">
-                                        <div class="col">
-                                            <figure class="favorite-item">
-                                                <a href="#">
-                                                    <img src="../assets/images/sports/sport-1.jpg" alt="">
-                                                </a>
-                                            </figure>
-                                        </div>
-                                        <div class="col">
-                                            <figure class="favorite-item">
-                                                <a href="#">
-                                                    <img src="../assets/images/sports/sport-2.jpg" alt="">
-                                                </a>
-                                            </figure>
-                                        </div>
-                                        <div class="col">
-                                            <figure class="favorite-item">
-                                                <a href="#">
-                                                    <img src="../assets/images/sports/sport-3.jpg" alt="">
-                                                </a>
-                                            </figure>
-                                        </div>
-                                        <div class="col">
-                                            <figure class="favorite-item">
-                                                <a href="#">
-                                                    <img src="../assets/images/sports/sport-4.jpg" alt="">
-                                                </a>
-                                            </figure>
-                                        </div>
-                                        <div class="col">
-                                            <figure class="favorite-item">
-                                                <a href="#">
-                                                    <img src="../assets/images/sports/sport-5.jpg" alt="">
-                                                </a>
-                                            </figure>
-                                        </div>
-                                        <div class="col">
-                                            <figure class="favorite-item">
-                                                <a href="#">
-                                                    <img src="../assets/images/sports/sport-6.jpg" alt="">
-                                                </a>
-                                            </figure>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="load-more text-center">
-                                                <button class="load-more-btn">load more</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- favorite book section end -->
-        </div>
-
-    </main>
+ 
+    <router-view ></router-view>
 
     <!-- Scroll to top start -->
     <div class="scroll-top not-visible">
@@ -1175,7 +696,9 @@
  if(!Cookies.get('access_token')){
     window.location.href="/"  
  }
+ document.getElementById("myCheck").click();
 </script>
+
   
     <!-- Modernizer JS -->
     <script src="../assets/js/vendor/modernizr-3.6.0.min.js"></script>
