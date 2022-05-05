@@ -32,7 +32,7 @@ public class Service {
 	private String description;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "user_id")
 	private User user;
 	
 	
