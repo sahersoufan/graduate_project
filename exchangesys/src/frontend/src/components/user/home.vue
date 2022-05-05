@@ -44,7 +44,7 @@
                                 <div class="main-menu-inner header-top-navigation">
                                     <nav>
                                         <ul class="main-menu">
-                                            <li ><a href="#">Services</a></li>
+                                             <li v-on:click="call('services')"><router-link to="" >Services</router-link></li>
                                             <li><a href="">Work</a></li>
                                             
                                             <li v-on:click="call('setting')"><router-link to="" >Friends</router-link></li>
@@ -94,6 +94,7 @@
             <div class="about-author-details">
                 <router-view></router-view>
               <Setting v-if="message === 'setting'"></Setting>
+               <Services v-if="message === 'services'"></Services>
             </div>
             <!-- about author details start -->
         
@@ -114,7 +115,9 @@
 
 
 import Setting from './setting.vue';
+
  import Cookies from 'js-cookie'
+import Services from './services.vue';
   export default {
 
     data() {
@@ -134,6 +137,7 @@ import Setting from './setting.vue';
     },
      components: {
     Setting,
+          Services,
   },created(){
      
           this.$axios.get('/api/islog')

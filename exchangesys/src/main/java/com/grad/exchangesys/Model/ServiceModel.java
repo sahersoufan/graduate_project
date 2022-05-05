@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import lombok.AllArgsConstructor;
@@ -20,7 +22,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EnableAutoConfiguration
-public class Service {
+public class ServiceModel {
 
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -30,9 +32,10 @@ public class Service {
 	
 	@Column(name = "service_description", nullable = false)
 	private String description;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id")
+
+	@ManyToOne(fetch = FetchType.LAZY,optional = false)
+	@JoinColumn(name = "user_id")
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private User user;
 	
 	

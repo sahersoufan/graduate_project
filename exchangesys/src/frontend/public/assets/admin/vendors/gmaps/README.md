@@ -364,7 +364,7 @@ Changelog
 
 0.2.4
 -----------------------
-* New feature: **Elevation service**
+* New feature: **Elevation serviceModel**
 
 0.2.3
 -----------------------

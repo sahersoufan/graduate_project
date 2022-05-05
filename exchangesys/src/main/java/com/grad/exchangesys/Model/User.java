@@ -1,20 +1,22 @@
 package com.grad.exchangesys.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
-import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.GenerationType.AUTO;
 
 @Entity @EnableAutoConfiguration
 @Data @NoArgsConstructor  @AllArgsConstructor
-public class User {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class User implements Serializable {
 
     @Id @GeneratedValue(strategy = AUTO)
     private Long id;
@@ -66,8 +68,7 @@ public class User {
     }
 
 
-    @OneToMany(mappedBy = "user")
-    private List<Service> services;
+
 
     public Long getId() {
         return id;

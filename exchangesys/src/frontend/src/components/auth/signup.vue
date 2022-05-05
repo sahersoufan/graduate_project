@@ -10,7 +10,7 @@
                   <div class="timeline-logo-area d-flex align-items-center">
 
                     <div class="timeline-tagline">
-                      <h6 class="tagline">It’s helps you to exchange services with the people in your life</h6>
+                      <h6 class="tagline">It’s helps you to exchange serviceModels with the people in your life</h6>
                     </div>
                   </div>
                 </div>

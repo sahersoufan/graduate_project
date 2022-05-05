@@ -47,10 +47,10 @@ public class UserController {
 
     }
     @PostMapping("/getuser")
-    public ResponseEntity<User> getuser(@RequestBody User user1){
+    public ResponseEntity<User> getuser(@RequestBody User user1,HttpServletRequest request){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/getuser").toUriString());
 
-        User user=userService.getUser(user1.getUsername());
+        User user=userService.getUser(request);
         return ResponseEntity.created(uri).body(user);
     }
 

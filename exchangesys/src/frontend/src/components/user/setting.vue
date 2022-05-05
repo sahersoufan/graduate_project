@@ -6,7 +6,7 @@
                                 <div class="about-me">
                                     <ul class="nav flex-column about-author-menu">
                                         <li><a href="#one" data-toggle="tab" class="active">Edit Basic Information</a></li>
-                                        <li><a href="#two" data-toggle="tab">Add Services</a></li>
+                                        
                                         <li><a href="#three" data-toggle="tab">Add Work</a></li>
                                         <li><a href="#four" data-toggle="tab">Change Password </a></li>
                                         <li><a href="#five" data-toggle="tab">Contact Details</a></li>
@@ -66,46 +66,7 @@
                                             
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="two">
-                                        <div class="work-zone">
-                                            <div class="author-desc-title d-flex">
-                                                <h6 class="author"><a href="#">Add Services</a></h6>
-                                             
-                                            </div>
-                                                    <form class="signup-inner--form" method="post"  @submit.prevent="">
-                                                            <div class="row">
-                                                            
-                                                            
-                                                            
-                                                            
-                                                            
-                                                                <div class="col-md-6" v-for="(input,k) in inputs" :key="k">
-                                                                <input type="text" class="single-field" placeholder="name services"  v-model="input.name" >
-                                                                <input type="text" class="single-field" placeholder="description"  v-model="input.description" >
-                                                                 <span>
-                                                                
-                                                                <i class="fa fa-minus-circle" style="font-size:28px;color:red" @click="remove(k)" v-show="k || ( !k && inputs.length > 1)">   &nbsp;   </i>
-                                                                   
-                                                                    <i class="fa fa-plus-circle" style="font-size:28px;color:green"  @click="add(k)" v-show="k == inputs.length-1">  &nbsp;  </i>
-                                                                </span>
-                                                            </div>
-
-
-
-                                                            
-                                                            <div class="col-md-8">
-                                                                
-                                                            </div>
-                                    
-                                                            <div class="col-md-4">
-                                                                <button class="submit-btn " style="border-radius: 5%;">Update</button>
-                                                            </div>
-                                                        
-                                                            </div>
-                                                    </form>
-                                            
-                                      </div>
-                                    </div>
+                                
                                     <div class="tab-pane fade" id="three">
                                         <div class="work-zone">
                                             <div class="author-desc-title d-flex">
@@ -174,13 +135,13 @@
                                             <form class="signup-inner--form" method="post"  @submit.prevent="changepassword">
                                                             <div class="row">
                                                             <div class="col-12 ">
-                                                                <input type="password" placeholder="Old Password" id="password" name="password" class="single-field" v-model="password.old" >
+                                                                <label for="password"></label><input type="password" placeholder="Old Password" id="password" name="password" class="single-field" v-model="password.old" >
                                                             </div>
                                                                 <div class="col-12 ">
-                                                                <input type="password" placeholder="New Password" id="password" name="password" class="single-field" v-model="password.new" >
+                                                                <input type="password" placeholder="New Password"  name="password" class="single-field" v-model="password.new" >
                                                             </div>
                                                                 <div class="col-12 ">
-                                                                <input type="password" placeholder="Confirm Password" id="password" name="password" class="single-field" v-model="password.confirm" >
+                                                                <input type="password" placeholder="Confirm Password"  name="password" class="single-field" v-model="password.confirm" >
                                                             </div>
                                                             
                                                        
@@ -295,7 +256,7 @@
         Female:"female",
         inputs: [
             {
-                name: '',
+                serviceName: '',
                 description:''
             }
         ],
@@ -356,7 +317,7 @@
      
 
         add(index) {
-            this.inputs.push({ name: '',description:'' });
+            this.inputs.push({ serviceName: '',description:'' });
         },
         remove(index) {
             this.inputs.splice(index, 1);
@@ -413,7 +374,7 @@
 
             if(this.password.new===this.password.confirm){
             
-                  this.$axios.post('/api/user/changepass',this.password)
+            this.$axios.post('/api/user/changepass',this.password)
               .then(res => {
 
                       console.log("change",  res)
@@ -450,6 +411,40 @@
                         title: 'Password does not match'
                       })
             }
+
+        },
+        services(){
+
+               this.$axios.post('/api/services/save',this.inputs)
+              .then(res => {
+
+                      console.log("services",  res)
+                        //  User.responseAfterLogin(res)
+                        if(res.data==true){
+                             this.$Toast.fire({
+                            icon: 'success',
+                            title: "successfly Addes"
+                          })  
+
+
+                        }else{
+                                this.$Toast.fire({
+                                icon: 'error',
+                                title: 'Sorry but something wrong'
+                            })
+
+                        }
+                                          
+         
+
+              })
+              .catch(
+                      this.$Toast.fire({
+                        icon: 'warning',
+                        title: 'Sorry but something wrong'
+                      })
+              )
+           
 
         }
 /* eslint-disable */
