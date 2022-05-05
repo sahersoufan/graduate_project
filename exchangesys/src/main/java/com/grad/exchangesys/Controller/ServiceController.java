@@ -37,7 +37,7 @@ public class ServiceController {
 		return serviceService.getAllServices();
 	}
 	
-	@GetMapping("{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Service> getServiceById(@PathVariable("id") Long serviceId){
 		
 		return new ResponseEntity<Service>(serviceService.getServiceById(serviceId), HttpStatus.OK);
@@ -51,7 +51,7 @@ public class ServiceController {
 		
 	}
 	
-	@DeleteMapping("{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteService(@PathVariable Long id){
 		
 		serviceService.deleteService(id);

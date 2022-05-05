@@ -30,6 +30,9 @@ public class User {
     
     @OneToMany(mappedBy = "user")
     private List<Service> services;
+    
+    @OneToMany(mappedBy = "user")
+    private List<Complaint> complaints;
 
     public Long getId() {
         return id;
