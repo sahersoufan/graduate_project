@@ -4,7 +4,7 @@ import Vue from 'vue/dist/vue.js';
 import VueRouter from'vue-router'
 import { routes } from './routes';
 import axios from 'axios'
-
+import VueUploadMultipleImage from 'vue-upload-multiple-image'
 
 // Sweet Alert start
 import Swal from 'sweetalert2'
@@ -28,6 +28,8 @@ const Toast = Swal.mixin({
 
 const router = new VueRouter({
   routes,
+  linkActiveClass: "active",
+  linkExactActiveClass: "exact-active",
   mode: 'history' ,
 
 })
@@ -40,6 +42,9 @@ Vue.prototype.$axios = axios
 const app=new Vue({
   el: '#app1',
   router,
+  components: {
+    VueUploadMultipleImage,
+  },
 
 })
 /* eslint-disable */

@@ -1,20 +1,22 @@
 package com.grad.exchangesys.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
-import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.GenerationType.AUTO;
 
 @Entity @EnableAutoConfiguration
 @Data @NoArgsConstructor  @AllArgsConstructor
-public class User {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class User implements Serializable {
 
     @Id @GeneratedValue(strategy = AUTO)
     private Long id;
@@ -26,6 +28,47 @@ public class User {
     private Integer age;
     private String password;
     private Integer Role;
+    private String phone;
+    private String description;
+    private String imagepath;
+    private String profilepath;
+
+    public String getImagepath() {
+        return imagepath;
+    }
+
+    public void setImagepath(String imagepath) {
+        this.imagepath = imagepath;
+    }
+
+    public String getProfilepath() {
+        return profilepath;
+    }
+
+    public void setProfilepath(String profilepath) {
+        this.profilepath = profilepath;
+    }
+
+
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+
+
 
     public Long getId() {
         return id;
