@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,9 +31,11 @@ public class User {
     private Integer Role;
     
     @OneToMany(mappedBy = "user")
+    @JsonManagedReference
     private List<Service> services;
     
     @OneToMany(mappedBy = "user")
+    @JsonManagedReference
     private List<Complaint> complaints;
 
     public Long getId() {
