@@ -1,57 +1,67 @@
 package com.grad.exchangesys.Services.impl;
 
 import java.util.List;
+
+import com.grad.exchangesys.Model.ServiceModel;
+import com.grad.exchangesys.Model.User;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import com.grad.exchangesys.Repository.ServiceRepo;
 import com.grad.exchangesys.Services.ServiceService;
 import com.grad.exchangesys.exception.ResourceNotFoundException;
 
+import javax.transaction.Transactional;
 
 
-@Service
+@Service @RequiredArgsConstructor
+@Transactional
+@Slf4j
 public class ServiceServiceImpl implements ServiceService{
 
-	private ServiceRepo serviceRepo;
-	
-	public ServiceServiceImpl(ServiceRepo serviceRepo) {
-		super();
-		this.serviceRepo = serviceRepo;
+	private final ServiceRepo serviceRepo;
+
+
+
+	@Override
+	public ServiceModel saveService(ServiceModel serviceModel) {
+		ServiceModel serviceModel1=serviceRepo.save(serviceModel);
+		if(serviceModel1.getId()==null){
+			log.info("erorre in save services");
+		}
+
+		return serviceModel1;
 	}
 
 
 	@Override
-	public com.grad.exchangesys.Model.Service saveService(com.grad.exchangesys.Model.Service service) {
+	public List<ServiceModel> getAllServices(User user) {
+		List<ServiceModel> list=serviceRepo.findAllByUser(user);
 
-		return serviceRepo.save(service);
+		return list;
 	}
 
 
 	@Override
-	public List<com.grad.exchangesys.Model.Service> getAllServices() {
-		// TODO Auto-generated method stub
-		return serviceRepo.findAll();
-	}
+	public ServiceModel getServiceById(Long id) {
 
-
-	@Override
-	public com.grad.exchangesys.Model.Service getServiceById(Long id) {
-		
-		return serviceRepo.findById(id)
+	 ServiceModel serviceModel=serviceRepo.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Service", "ID", id));
+		return serviceModel;
 	}
 
 
 	@Override
-	public com.grad.exchangesys.Model.Service updateService(com.grad.exchangesys.Model.Service service, Long id) {
+	public ServiceModel updateService(ServiceModel serviceModel) {
 		
-		com.grad.exchangesys.Model.Service exisitingService = serviceRepo.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Service", "ID", id));
+		ServiceModel exisitingServiceModel = serviceRepo.findById(serviceModel.getId())
+				.orElseThrow(() -> new ResourceNotFoundException("Service", "ID", serviceModel.getId()));
 		
-		exisitingService.setServiceName(service.getServiceName());
-		exisitingService.setDescription(service.getDescription());
+		exisitingServiceModel.setServiceName(serviceModel.getServiceName());
+		exisitingServiceModel.setDescription(serviceModel.getDescription());
 		
-		serviceRepo.save(exisitingService);
-		return exisitingService;
+		serviceRepo.save(exisitingServiceModel);
+		return exisitingServiceModel;
 		
 	}
 

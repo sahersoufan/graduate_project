@@ -10,6 +10,8 @@ public interface UserService {
     User saveUser(User user);
 
     User getUser(String email);
+
     User getUser(HttpServletRequest request );
+    User UpdateUser(User user);
 
 }
