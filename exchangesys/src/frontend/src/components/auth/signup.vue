@@ -10,7 +10,7 @@
                   <div class="timeline-logo-area d-flex align-items-center">
 
                     <div class="timeline-tagline">
-                      <h6 class="tagline">It’s helps you to exchange serviceModels with the people in your life</h6>
+                      <h6 class="tagline">It’s helps you to exchange services with the people in your life</h6>
                     </div>
                   </div>
                 </div>
@@ -42,7 +42,7 @@
             <div class="container-fluid p-0">
               <div class="row no-gutters">
                 <div class="col-lg-6 order-2 order-lg-1">
-                  <div class="timeline-bg-content bg-img"><img src="../../assets/images/timeline/adda-timeline.jpg">
+                  <div class="timeline-bg-content bg-img"><img src="assets/images/timeline/adda-timeline.jpg">
                     <h3 class="timeline-bg-title">Let’s see what’s happening to you and your world. Welcome in Adda.</h3>
                   </div>
                 </div>
@@ -143,12 +143,12 @@ const Toast = Swal.mixin({
                     if(res.data==="islog"){
                         console.log("islog",res.data)  ; 
                      if(Cookies.get('name')==="user"){
-                         window.location.href="user/home"
+                         window.location.href="user/home.html"
 
 
                      }
                       if(Cookies.get('name')==="admin"){
-                          window.location.href="admin/home"
+                          window.location.href="admin/home.html"
 
                      }
                     }                 
@@ -183,7 +183,7 @@ const Toast = Swal.mixin({
     },
     login(){
     
- const _this= this;  
+
     const myForm = document.getElementById('form');
 
 
@@ -203,20 +203,15 @@ const Toast = Swal.mixin({
             Cookies.set('access_token', json.access_token, { path: '/' })
             Cookies.set('refresh_token', json.refresh_token, { path: '/' })
             Cookies.set('name', json.auth, { path: '/' })
-               Cookies.set('user', json.name, { path: '/' })
            
                Toast.fire({
                             icon: 'success',
                             title: "success login"
                })
                if(json.auth==="user"){
-                   
-                //   _this.$router.replace("/user/").catch(()=>{console.log("hhhhh")});
-                 //  location.reload(); 
-                  /// console.log( _this.$router.push({  path: '/user/'})   )
-                  window.location.href="user/home"
+                  window.location.href="user/home.html"
                }else{
-                  window.location.href="admin/dashboard"
+                  window.location.href="admin/home.html"
                }
     
              

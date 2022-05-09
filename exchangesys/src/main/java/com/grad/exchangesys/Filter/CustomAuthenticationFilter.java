@@ -49,8 +49,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
 
-
-
         User user = (User) authResult.getPrincipal();
 
         final String[] auth=new String[1];
