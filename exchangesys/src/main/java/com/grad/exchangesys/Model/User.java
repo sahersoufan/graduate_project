@@ -30,16 +30,6 @@ public class User implements Serializable {
     private Integer age;
     private String password;
     private Integer Role;
-
-    
-    @OneToMany(mappedBy = "user")
-    @JsonManagedReference
-    private List<Service> services;
-    
-    @OneToMany(mappedBy = "user")
-    @JsonManagedReference
-    private List<Complaint> complaints;
-
     private String phone;
     private String description;
     private String imagepath;

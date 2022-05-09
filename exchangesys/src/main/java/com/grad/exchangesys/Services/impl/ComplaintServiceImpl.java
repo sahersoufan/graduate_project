@@ -2,6 +2,7 @@ package com.grad.exchangesys.Services.impl;
 
 import java.util.List;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import com.grad.exchangesys.Model.Complaint;
@@ -9,15 +10,12 @@ import com.grad.exchangesys.Repository.ComplaintRepo;
 import com.grad.exchangesys.Services.ComplaintService;
 import com.grad.exchangesys.exception.ResourceNotFoundException;
 
-@Service
+@Service @RequiredArgsConstructor
 public class ComplaintServiceImpl implements ComplaintService{
 
-	private ComplaintRepo complaintRepo;
+	private final ComplaintRepo complaintRepo;
 	
-	public ComplaintServiceImpl(ComplaintRepo complaintRepo) {
-		super();
-		this.complaintRepo = complaintRepo;
-	}
+
 
 	@Override
 	public Complaint saveComlplaint(Complaint complaint) {

@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -36,15 +39,17 @@ public class Complaint {
 	private String description;
 	
 	@CreatedDate
+	@JsonFormat(pattern="yyyy-MM-dd")
 	@Column(name = "created_at")
 	private Date createdAt;
 	
 	@LastModifiedDate
 	@Column(name = "updated_at")
 	private Date updatedAt;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
+
+
+	@ManyToOne(fetch = FetchType.LAZY,optional = false)
 	@JoinColumn(name = "user_id")
-	@JsonBackReference
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private User user;
 }

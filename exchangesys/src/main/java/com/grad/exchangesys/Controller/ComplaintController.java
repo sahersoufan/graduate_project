@@ -1,7 +1,14 @@
 package com.grad.exchangesys.Controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.grad.exchangesys.Model.User;
+import com.grad.exchangesys.Services.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,23 +23,30 @@ import org.springframework.web.bind.annotation.RestController;
 import com.grad.exchangesys.Model.Complaint;
 import com.grad.exchangesys.Services.ComplaintService;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/complaints")
 public class ComplaintController {
 
-	private ComplaintService complaintService;
+	private final ComplaintService complaintService;
+	private final UserService userService;
 
-	public ComplaintController(ComplaintService complaintService) {
-		super();
-		this.complaintService = complaintService;
-	}
+
+
+	@PostMapping("/save")
+	public Boolean saveComplaint(@RequestBody Complaint complaint, HttpServletRequest request){
+
+		User user=userService.getUser(request);
+
+
+		complaint.setUser(user);
+		complaintService.saveComlplaint(complaint);
+		return true;
+			}
 	
-	@PostMapping
-	public ResponseEntity<Complaint> saveComplaint(@RequestBody Complaint complaint){
-		return new ResponseEntity<Complaint>(complaintService.saveComlplaint(complaint), HttpStatus.CREATED);
-	}
-	
-	@GetMapping
+	@GetMapping("all")
 	public List<Complaint> getAllComplaints(){
 		return complaintService.getAllComplaints();
 	}
@@ -44,12 +58,7 @@ public class ComplaintController {
 		
 	}
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<Complaint> updateComplaint(@PathVariable("id") Long id, @RequestBody Complaint complaint){
-		
-		return new ResponseEntity<Complaint>(complaintService.updateComplaint(complaint, id), HttpStatus.OK);
-		
-	}
+
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteComplaint(@PathVariable Long id){
