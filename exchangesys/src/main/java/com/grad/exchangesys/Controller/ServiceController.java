@@ -58,7 +58,6 @@ public class ServiceController {
 		URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/services/"+serviceId).toUriString());
 		ServiceModel serviceModel=serviceService.getServiceById(serviceId);
 		return ResponseEntity.created(uri).body(serviceModel);
-
 		
 	}
 	
@@ -70,6 +69,7 @@ public class ServiceController {
 		
 	}
 	
+
 	@DeleteMapping("delete/{id}")
 	public ResponseEntity<String> deleteService(@PathVariable Long id){
 		

@@ -201,12 +201,12 @@
                                                 <h6 class="author"><a href="#">complaints </a></h6>
                                               
                                             </div>
-                                            <form class="signup-inner--form" method="post"  @submit.prevent="">
+                                            <form class="signup-inner--form" method="post"  @submit.prevent="savecomplaints">
                                                             <div class="row">
                                                          
                                                             
                                                         <div class="col-12">
-                                                                <textarea  class="single-field" placeholder="please explain your problem"> </textarea>
+                                                                <textarea  class="single-field" placeholder="please explain your problem" v-model="complaints.description"> </textarea>
                                                             </div>
                                                              
                                                             <div class="col-md-8">
@@ -265,6 +265,9 @@
             new:null,
             confirm:null,
 
+        },complaints:{
+             description:'',
+             createdAt:'',
         }
        
       
@@ -445,6 +448,29 @@
                       })
               )
            
+
+        },savecomplaints(){
+             var currentDate = new Date();
+             this.complaints.createdAt=currentDate;
+              this.$axios.post('/api/complaints/save',this.complaints)
+              .then(res => {
+
+                      console.log("complaints",  res)
+                        //  User.responseAfterLogin(res)
+                          this.$Toast.fire({
+                            icon: 'success',
+                            title: "successfully submit"
+                          })  
+                           location.reload();                  
+         
+
+              })
+              .catch(
+                      this.$Toast.fire({
+                        icon: 'warning',
+                        title: 'Sorry but something wrong'
+                      })
+              )
 
         }
 /* eslint-disable */
