@@ -72,6 +72,25 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public User getUser(Long id) {
+        return userRepo.findById(id).get();
+    }
+
+    @Override
+    public List<User> All(Long id) {
+      List<User> users=userRepo.friendrequest(id);
+        return users;
+
+
+
+    }
+
+    @Override
+    public List<User> getusernotfriend(String email) {
+        return userRepo.getAllusernotFrind(email);
+    }
+
+    @Override
     public User getUser(HttpServletRequest request) {
         String url= (String) request.getAttribute("url");
 

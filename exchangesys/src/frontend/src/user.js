@@ -5,6 +5,8 @@ import VueRouter from'vue-router'
 import { routes } from './routes';
 import axios from 'axios'
 import VueUploadMultipleImage from 'vue-upload-multiple-image'
+import JwPagination from 'jw-vue-pagination';
+Vue.component('jw-pagination', JwPagination);
 
 // Sweet Alert start
 import Swal from 'sweetalert2'
