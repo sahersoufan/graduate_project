@@ -46,7 +46,24 @@ public class ServiceController {
 		}
 		return true;
 	}
-	
+	@PostMapping("/add")
+	public Boolean add(@RequestBody ServiceModel serviceModel, HttpServletRequest request){
+		User user=userService.getUser(request);
+
+
+		if(serviceModel.getDescription()==null || serviceModel.getDescription().equals("") ||serviceModel.getServiceName()==null ||serviceModel.getServiceName().equals("")){
+			return false;
+		}
+			ServiceModel serviceModel1 =new ServiceModel();
+			serviceModel1.setUser(user);
+			serviceModel1.setDescription(serviceModel.getDescription());
+			serviceModel1.setServiceName(serviceModel.getServiceName());
+			serviceService.saveService(serviceModel1);
+			//	serviceService.saveService(service[i]);
+
+		return true;
+	}
+
 	@GetMapping("/all")
 	public List<ServiceModel> getAllServices(HttpServletRequest request){
 		User user=userService.getUser(request);

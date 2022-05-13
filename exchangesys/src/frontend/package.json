@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@handsontable/vue3": "^12.0.0",
+    "@ocrv/vue-tailwind-pagination": "^0.0.4",
     "@syncfusion/ej2-material-theme": "^20.1.52",
     "@syncfusion/ej2-vue-grids": "^20.1.52",
     "ag-grid-community": "^27.2.1",
@@ -18,6 +19,7 @@
     "gridjs-vue": "^5.0.4",
     "handsontable": "^12.0.0",
     "jquery.cookie": "^1.4.1",
+    "jw-vue-pagination": "^1.0.3",
     "style-loader": "^3.3.1",
     "sweetalert2": "^11.4.9",
     "vue": "^2.6.14",
