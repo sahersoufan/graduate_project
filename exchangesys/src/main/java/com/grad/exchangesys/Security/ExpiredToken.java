@@ -12,16 +12,6 @@ import java.io.IOException;
 import static java.util.Arrays.stream;
 
 public class ExpiredToken {
-    String user;
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-
     public int checkExpire(HttpServletRequest request) throws IOException, InterruptedException {
         Cookie[] authCookie = request.getCookies();
         final String[] token_cookie=new String[2];
@@ -40,7 +30,6 @@ public class ExpiredToken {
             Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
             JWTVerifier verifier = JWT.require(algorithm).build();
             DecodedJWT decodedJWT = verifier.verify(token);
-           user= decodedJWT.getToken().toString();
        return 0;
         }
         catch (Exception e){

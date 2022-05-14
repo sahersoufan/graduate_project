@@ -22,17 +22,17 @@ public class FriendsList {
 
 
     @Id
-    private Long id_user;
+     private Long id_user;
 
-    private String name;
+     private String name;
 
-    private Long id_friend;
+     private Long id_friend;
 
     @GeneratedValue(strategy = AUTO)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id_user_freinds")
-    private User user;
-    //     private  Map<Long,String> friends;
+     private User user;
+//     private  Map<Long,String> friends;
     public FriendsList()
     {
 //        this.friends.put(user.getId(),user.getUsername());

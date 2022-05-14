@@ -16,8 +16,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FriendsServiceImpl implements FriendsService {
 
-    private final  FriendsListRepo friendsListRepo=null;
-    private final UserRepo userRepo=null;
+      private final  FriendsListRepo friendsListRepo=null;
+      private final UserRepo userRepo=null;
 
     @Override
     public List<FriendsList> getFrinends(Long id) {
@@ -25,14 +25,14 @@ public class FriendsServiceImpl implements FriendsService {
         List <FriendsList> myfriends =new ArrayList<>();
         List<FriendsList> friends=friendsListRepo.findAll();
         System.out.println("friends   :");
-        for (int i=0 ;i< friends.size(); i++){
-            if (friends.get(i).getId_user()==id){
+            for (int i=0 ;i< friends.size(); i++){
+                if (friends.get(i).getId_user()==id){
 //                    System.out.println("  name             :  "+friends.get(i).getName());
 //                    System.out.println("  friend  id       :  "+friends.get(i).getId_friend());
-                myfriends.add(friends.get(i));
-            }
+                   myfriends.add(friends.get(i));
+                }
         }
-        return myfriends;
+            return myfriends;
 
     }
 
@@ -41,14 +41,14 @@ public class FriendsServiceImpl implements FriendsService {
         List<User> result = new ArrayList<>();
 
         for(int i=0 ; i< userRepo.findAll().size(); i++){
-            if(userRepo.findByUsername(username).equals(username)) {
+        if(userRepo.findByUsername(username).equals(username)) {
 //            System.out.println("user found    \n\t  name   :   "+username);
 //            System.out.println("              \n\t  gender :   "+userRepo.findByUsername(username).getGender());
 //            System.out.println("              \n\t  age    :   "+userRepo.findByUsername(username).getAge());
-                result.add(userRepo.findByUsername(username));
-            }
+            result.add(userRepo.findByUsername(username));
         }
-        return result;
+    }
+      return result;
     }
 
     @Override
