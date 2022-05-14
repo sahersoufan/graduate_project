@@ -5,7 +5,6 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.grad.exchangesys.Model.FriendsList;
 import com.grad.exchangesys.Model.User;
 import com.grad.exchangesys.Repository.UserRepo;
 import com.grad.exchangesys.Services.UserService;
@@ -31,17 +30,16 @@ import static java.util.Arrays.stream;
 @Service @RequiredArgsConstructor @Transactional @Slf4j
 public class UserServiceImpl implements UserService, UserDetailsService {
 
-    private final UserRepo userRepo=null;
+    private final UserRepo userRepo;
 
-    private final PasswordEncoder passwordEncoder=null;
+    private final PasswordEncoder passwordEncoder;
 
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepo.findByUsername(username);
         if (user == null){
-
-            log.error("usern not found in the database");
+            log.error("user not found in the database");
             throw new  UsernameNotFoundException("user not found in the database");
         }else{
             log.info("user found in the database: {}",username);
@@ -74,6 +72,25 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public User getUser(Long id) {
+        return userRepo.findById(id).get();
+    }
+
+    @Override
+    public List<User> All(Long id) {
+      List<User> users=userRepo.friendrequest(id);
+        return users;
+
+
+
+    }
+
+    @Override
+    public List<User> getusernotfriend(String email) {
+        return userRepo.getAllusernotFrind(email);
+    }
+
+    @Override
     public User getUser(HttpServletRequest request) {
         String url= (String) request.getAttribute("url");
 
@@ -102,5 +119,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         }
 
     }
+
+    @Override
+    public User UpdateUser(User user) {
+        return userRepo.save(user);
+    }
+
 
 }

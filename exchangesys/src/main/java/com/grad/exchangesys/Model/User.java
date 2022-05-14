@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -66,9 +68,6 @@ public class User implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-
-
-
 
     public Long getId() {
         return id;

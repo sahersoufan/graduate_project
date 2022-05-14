@@ -1,6 +1,6 @@
 
 
-import Vue from 'vue'
+import Vue from 'vue/dist/vue.js';
 import VueRouter from'vue-router'
 import { routes } from './routes';
 import axios from 'axios'
@@ -10,7 +10,7 @@ import App from './components/auth/signup.vue'
 import Swal from 'sweetalert2'
 window.Swal = Swal;
 
-
+Vue.use(VueRouter);
 
 const Toast = Swal.mixin({
   toast: true,
@@ -28,18 +28,20 @@ const Toast = Swal.mixin({
 
 const router = new VueRouter({
   routes,
+  linkActiveClass: "active",
+  linkExactActiveClass: "exact-active",
   mode: 'history' ,
 
 })
 Vue.prototype.$Toast = Toast
 Vue.prototype.$axios = axios
-Vue.prototype.$router = router
 
 
 
-new Vue({
-  
+/* eslint-disable */
+const app=new Vue({
+  el: '#app',
   router,
-  render: h => h(App)
-}).$mount('#app')
-
+ render: h => h(App)
+})
+/* eslint-disable */
