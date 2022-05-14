@@ -9,8 +9,10 @@ import java.util.Map;
 
 public interface FriendsService {
 
-    List<FriendsList> getFrinends(Long id);
-    User AddFriend(String username ,Long id);
-    List<User> searchOnFriend(String name);
-    void deleteFriend(String username, Long id);
+   List<FriendsList> getFrinends(Long id);
+     void AddFriend(FriendsList friendsList);
+     List<User> getusersFriend(Long id);
+     FriendsList getFriend(Long user_id,Long f_id);
+     Boolean  deleteFriend(FriendsList friendsList);
+
 }

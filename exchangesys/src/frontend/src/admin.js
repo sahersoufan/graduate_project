@@ -9,7 +9,12 @@ import axios from 'axios'
 // Sweet Alert start
 import Swal from 'sweetalert2'
 window.Swal = Swal;
+import VueGoodTablePlugin from 'vue-good-table';
 
+// import the styles
+import 'vue-good-table/dist/vue-good-table.css'
+
+Vue.use(VueGoodTablePlugin);
 Vue.use(VueRouter);
 
 const Toast = Swal.mixin({

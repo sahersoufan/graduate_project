@@ -2403,7 +2403,7 @@ textarea:focus {
   position: absolute;
   height: 170px;
   width: 174px;
-  background-image: url("../images/icons/login.png");
+  
   background-repeat: no-repeat;
   -webkit-transform: translate(-50%, -80%);
       -ms-transform: translate(-50%, -80%);
@@ -2900,9 +2900,7 @@ textarea:focus {
   background-color: #fff;
 }
 
-.friends-section .content-box.friends-zone .friend-list-view:hover {
-  background-color: #dc4734;
-}
+
 
 .friend-list-view {
   display: -webkit-box;
@@ -2929,9 +2927,7 @@ textarea:focus {
   }
 }
 
-.friend-list-view:hover {
-  background-color: #dc4734;
-}
+
 
 .friend-list-view:hover .author a {
   color: #fff;

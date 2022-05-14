@@ -16,59 +16,35 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FriendsServiceImpl implements FriendsService {
 
-      private final  FriendsListRepo friendsListRepo=null;
-      private final UserRepo userRepo=null;
+      private final  FriendsListRepo friendsListRepo;
+      private final UserRepo userRepo;
 
-    @Override
+   @Override
     public List<FriendsList> getFrinends(Long id) {
-
-        List <FriendsList> myfriends =new ArrayList<>();
-        List<FriendsList> friends=friendsListRepo.findAll();
-        System.out.println("friends   :");
-            for (int i=0 ;i< friends.size(); i++){
-                if (friends.get(i).getId_user()==id){
-//                    System.out.println("  name             :  "+friends.get(i).getName());
-//                    System.out.println("  friend  id       :  "+friends.get(i).getId_friend());
-                   myfriends.add(friends.get(i));
-                }
-        }
-            return myfriends;
-
+       return friendsListRepo.findAllByUser_id(id);
     }
 
     @Override
-    public List<User> searchOnFriend(String username) {
-        List<User> result = new ArrayList<>();
-
-        for(int i=0 ; i< userRepo.findAll().size(); i++){
-        if(userRepo.findByUsername(username).equals(username)) {
-//            System.out.println("user found    \n\t  name   :   "+username);
-//            System.out.println("              \n\t  gender :   "+userRepo.findByUsername(username).getGender());
-//            System.out.println("              \n\t  age    :   "+userRepo.findByUsername(username).getAge());
-            result.add(userRepo.findByUsername(username));
-        }
-    }
-      return result;
-    }
-
-    @Override
-    public User AddFriend(String username, Long id) {
-        FriendsList friendsList = friendsListRepo.getById (id);
-        User newfriend = userRepo.findByUsername(username);
-        friendsList.setId_friend(newfriend.getId());
-        friendsList.setName(username);
+    public void AddFriend(FriendsList friendsList) {
+        assert false;
         friendsListRepo.save(friendsList);
-
-        return userRepo.findByUsername(username);
     }
 
     @Override
-    public void deleteFriend(String username, Long id) {
-        FriendsList friendsList = friendsListRepo.getById (id);
-
-//        System.out.println(" column deleted  :\n friend name  :    "+ friendsList.getName() +"" +
-//                "\n  friend Id :    "+friendsList.getId_friend());
-        friendsListRepo.delete(friendsList);
+    public List<User> getusersFriend(Long id) {
+        return friendsListRepo.findusersfriend(id);
     }
+
+    @Override
+    public FriendsList getFriend(Long user_id, Long f_id) {
+        return friendsListRepo.getfriend(user_id,f_id);
+    }
+
+    @Override
+    public Boolean deleteFriend(FriendsList friendsList) {
+         friendsListRepo.delete(friendsList);
+         return true;
+    }
+
 
 }
