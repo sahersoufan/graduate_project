@@ -6,6 +6,15 @@ import { routes } from './routes';
 import axios from 'axios'
 import VueUploadMultipleImage from 'vue-upload-multiple-image'
 import JwPagination from 'jw-vue-pagination';
+import Carousel3d from 'vue-carousel-3d';
+import '@morioh/v-lightbox/dist/lightbox.css';
+
+import Lightbox from '@morioh/v-lightbox'
+
+// global register
+Vue.use(Lightbox);
+Vue.use(Carousel3d);
+
 Vue.component('jw-pagination', JwPagination);
 
 // Sweet Alert start

@@ -1,15 +1,14 @@
 package com.grad.exchangesys.Controller;
 
 
-import com.grad.exchangesys.Model.FriendRequest;
-import com.grad.exchangesys.Model.FriendsList;
-import com.grad.exchangesys.Model.User;
+import com.grad.exchangesys.Model.*;
 import com.grad.exchangesys.Services.FriendRequestServices;
 import com.grad.exchangesys.Services.FriendsService;
 import com.grad.exchangesys.Services.FriendsServiceImpl;
 import com.grad.exchangesys.Services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,6 +47,15 @@ public class FriendsController {
         friendsList1.setUser(userService.getUser(friendRequest.getUser_id()));
         friendsList1.setIszone((long) 0);
         friendsServiceImpl.AddFriend(friendsList1);
+
+
+        ActivityFriends activityFriends=new ActivityFriends();
+        activityFriends.setName("add");
+
+        activityFriends.setFriendname(userService.getUser(friendRequest.getUser_id()).getFirstname());
+        activityFriends.setType("accept");
+        activityFriends.setUser(user);
+        friendRequestServices.saveactivity(activityFriends);
 
 
         friendRequestServices.deleterequest(friendRequest);
@@ -93,6 +101,13 @@ public class FriendsController {
 
         return new ResponseEntity<String>("friend Deleted Successfully!.", HttpStatus.OK);
 
+    }
+
+    @GetMapping("/count")
+    public long count(HttpServletRequest request){
+
+        User user=userService.getUser(request);
+       return friendsServiceImpl.getcount(user.getId());
     }
 
 }

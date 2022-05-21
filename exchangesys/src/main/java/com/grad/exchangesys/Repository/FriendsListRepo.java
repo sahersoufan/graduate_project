@@ -17,4 +17,7 @@ public interface FriendsListRepo extends JpaRepository<FriendsList , Long> {
     @Query("SELECT f  FROM FriendsList f WHERE f.user_id=:user and f.user.id=:friend" )
     FriendsList getfriend(Long user,Long friend);
 
+
+    long countByUser_id(long user_id);
+
 }

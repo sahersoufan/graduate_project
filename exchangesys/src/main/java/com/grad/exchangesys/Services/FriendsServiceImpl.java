@@ -17,7 +17,6 @@ import java.util.List;
 public class FriendsServiceImpl implements FriendsService {
 
       private final  FriendsListRepo friendsListRepo;
-      private final UserRepo userRepo;
 
    @Override
     public List<FriendsList> getFrinends(Long id) {
@@ -44,6 +43,11 @@ public class FriendsServiceImpl implements FriendsService {
     public Boolean deleteFriend(FriendsList friendsList) {
          friendsListRepo.delete(friendsList);
          return true;
+    }
+
+    @Override
+    public long getcount(long id) {
+        return friendsListRepo.countByUser_id(id);
     }
 
 

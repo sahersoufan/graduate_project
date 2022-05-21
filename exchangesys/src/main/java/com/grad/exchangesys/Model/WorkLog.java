@@ -1,31 +1,42 @@
 package com.grad.exchangesys.Model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.*;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.AUTO;
 
 
 @Entity
-@EnableAutoConfiguration
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
 public class WorkLog {
 
     @Id @GeneratedValue(strategy = AUTO)
    private Long id;
    private String name;
-   private String imagePath;
-   private String videoPath;
+   private String company;
+
+
    private String location;
-   private String ratting;
+   @CreatedDate
+   @JsonFormat(pattern="yyyy-MM-dd")
+   private Date startdate;
+   @CreatedDate
+   @JsonFormat(pattern="yyyy-MM-dd")
+   private Date enddate;
+
+//   @OneToMany(cascade = CascadeType.ALL)
+//   private List<WorkImage> image;
+
 
    @GeneratedValue(strategy = AUTO)
    @ManyToOne

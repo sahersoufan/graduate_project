@@ -1,24 +1,28 @@
 package com.grad.exchangesys.Controller;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Serializable;
 import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
 
-import com.grad.exchangesys.Model.ServiceModel;
-import com.grad.exchangesys.Model.User;
+import com.grad.exchangesys.Model.*;
+import com.grad.exchangesys.Services.ServicesImageServices;
 import com.grad.exchangesys.Services.UserService;
+import com.grad.exchangesys.Services.WorkImageServices;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
 import com.grad.exchangesys.Services.ServiceService;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +34,8 @@ public class ServiceController {
 
 	private final ServiceService serviceService;
 	private final UserService userService;
+	private final ServicesImageServices servicesImageServices;
+
 
 	@PostMapping("/save")
 	public Boolean saveService(@RequestBody ServiceModel[] serviceModel, HttpServletRequest request){
@@ -47,27 +53,48 @@ public class ServiceController {
 		return true;
 	}
 	@PostMapping("/add")
-	public Boolean add(@RequestBody ServiceModel serviceModel, HttpServletRequest request){
+	public Long add(@RequestBody ServiceModel serviceModel, HttpServletRequest request){
 		User user=userService.getUser(request);
 
 
+
 		if(serviceModel.getDescription()==null || serviceModel.getDescription().equals("") ||serviceModel.getServiceName()==null ||serviceModel.getServiceName().equals("")){
-			return false;
+			return Long.valueOf(0);
 		}
 			ServiceModel serviceModel1 =new ServiceModel();
 			serviceModel1.setUser(user);
 			serviceModel1.setDescription(serviceModel.getDescription());
 			serviceModel1.setServiceName(serviceModel.getServiceName());
-			serviceService.saveService(serviceModel1);
+			ServiceModel service=serviceService.saveService(serviceModel1);
+			ActivityServices activityServices=new ActivityServices();
+			activityServices.setName("add");
+			activityServices.setServicesname(service.getServiceName());
+			activityServices.setUser(user);
+
+			serviceService.saveactivity(activityServices);
 			//	serviceService.saveService(service[i]);
 
-		return true;
+		return service.getId();
 	}
 
 	@GetMapping("/all")
-	public List<ServiceModel> getAllServices(HttpServletRequest request){
+	public List<Object> getAllServices(HttpServletRequest request){
 		User user=userService.getUser(request);
-		return serviceService.getAllServices(user);
+		List<Object> list=new ArrayList<>();
+		List<ServiceModel> serviceModels=serviceService.getAllServices(user);
+		list.add(serviceModels);
+		for (ServiceModel serviceModel : serviceModels) {
+			list.add(servicesImageServices.getservicesimage(serviceModel.getId()));
+
+		}
+
+		return list;
+	}
+	@GetMapping(value = "/allimage/{id}")
+	public List<ServicesImage> getimage(@PathVariable Long id) {
+
+		return servicesImageServices.getservicesimage(id);
+
 	}
 	
 	@GetMapping("{id}")
@@ -77,11 +104,88 @@ public class ServiceController {
 		return ResponseEntity.created(uri).body(serviceModel);
 		
 	}
-	
-	@PutMapping("/update")
-	public boolean updateService( @RequestBody ServiceModel serviceModel){
-		serviceService.updateService(serviceModel);
+	@PostMapping(value = "/addimage/{id}")
+	public Boolean addimageservices(HttpServletRequest request, @RequestParam("files") MultipartFile[] multipartFile, @PathVariable Long id) throws IOException {
 
+		for(int i=0;i<multipartFile.length;i++){
+
+			ServicesImage servicesImage=new ServicesImage();
+			String fileName = StringUtils.cleanPath(multipartFile[i].getOriginalFilename());
+			User user=userService.getUser(request);
+			String uploadDir = "user-photos/services/" + user.getId();
+			Path uploadPath = Paths.get(uploadDir);
+
+			if (!Files.exists(uploadPath)) {
+				Files.createDirectories(uploadPath);
+			}
+			Path filePath;
+			try (InputStream inputStream = multipartFile[i].getInputStream()) {
+
+				filePath = uploadPath.resolve(fileName);
+				Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+				servicesImage.setImagePath(filePath.toString());
+				servicesImage.setServiceModel(serviceService.getServiceById(id));
+
+				servicesImageServices.SaveImage(servicesImage);
+			} catch (IOException ioe) {
+				throw new IOException("Could not save image file: " + fileName, ioe);
+			}
+
+		}
+
+		return true;
+	}
+
+
+	@PostMapping(value = "/updateimage/{id}")
+	public Boolean updateimagework(HttpServletRequest request,@RequestParam("files")MultipartFile[] multipartFile,@PathVariable Long id) throws IOException {
+
+
+		List<ServicesImage> servicesImages= servicesImageServices.getservicesimage(id);
+		for (int i=0;i<servicesImages.size();i++){
+			servicesImageServices.delete(servicesImages.get(i));
+
+		}
+		for(int i=0;i<multipartFile.length;i++){
+
+			ServicesImage servicesImage=new ServicesImage();
+			String fileName = StringUtils.cleanPath(multipartFile[i].getOriginalFilename());
+			User user=userService.getUser(request);
+			String uploadDir = "user-photos/services/" + user.getId();
+			Path uploadPath = Paths.get(uploadDir);
+
+			if (!Files.exists(uploadPath)) {
+				Files.createDirectories(uploadPath);
+			}
+			Path filePath;
+			try (InputStream inputStream = multipartFile[i].getInputStream()) {
+
+				filePath = uploadPath.resolve(fileName);
+				Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+				servicesImage.setImagePath(filePath.toString());
+				servicesImage.setServiceModel(serviceService.getServiceById(id));
+
+				servicesImageServices.SaveImage(servicesImage);
+			} catch (IOException ioe) {
+				throw new IOException("Could not save image file: " + fileName, ioe);
+			}
+
+		}
+
+		return true;
+	}
+
+
+	@PutMapping("/update")
+	public boolean updateService( @RequestBody ServiceModel serviceModel,HttpServletRequest request){
+		User user=userService.getUser(request);
+
+		ServiceModel serviceModel1=serviceService.updateService(serviceModel);
+		ActivityServices activityServices=new ActivityServices();
+		activityServices.setName("edit");
+		activityServices.setServicesname(serviceModel1.getServiceName());
+		activityServices.setUser(user);
+		serviceService.saveactivity(activityServices);
 		return true;
 		
 	}
@@ -89,11 +193,23 @@ public class ServiceController {
 
 	@DeleteMapping("delete/{id}")
 	public ResponseEntity<String> deleteService(@PathVariable Long id){
-		
+		serviceService.deleteactivity(serviceService.getServiceById(id).getServiceName());
+
+		List<ServicesImage> servicesImages= servicesImageServices.getservicesimage(id);
+		for (ServicesImage imagess : servicesImages) {
+			servicesImageServices.delete(imagess);
+
+		}
 		serviceService.deleteService(id);
-		
+
 		return new ResponseEntity<String>("Service Deleted Successfully!.", HttpStatus.OK);
 		
+	}
+
+	@GetMapping("/activity")
+	public List<ActivityServices> getactivity(HttpServletRequest request){
+		User user=userService.getUser(request);
+		return serviceService.getActivate(user);
 	}
 	
 }

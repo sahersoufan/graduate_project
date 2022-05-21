@@ -2,8 +2,10 @@ package com.grad.exchangesys.Services.impl;
 
 import java.util.List;
 
+import com.grad.exchangesys.Model.ActivityServices;
 import com.grad.exchangesys.Model.ServiceModel;
 import com.grad.exchangesys.Model.User;
+import com.grad.exchangesys.Repository.ActivityServicesRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,7 @@ import javax.transaction.Transactional;
 public class ServiceServiceImpl implements ServiceService{
 
 	private final ServiceRepo serviceRepo;
+	private final ActivityServicesRepo activityServicesRepo;
 
 
 
@@ -74,10 +77,23 @@ public class ServiceServiceImpl implements ServiceService{
 		serviceRepo.deleteById(id);
 	
 	}
-	
-	
-	
-	
 
-	
+	@Override
+	public List<ActivityServices> getActivate(User user) {
+		return activityServicesRepo.findTop3ByUserOrderByIdDesc(user);
+	}
+
+	@Override
+	public ActivityServices saveactivity(ActivityServices activityServices) {
+		return activityServicesRepo.save(activityServices);
+	}
+
+	@Override
+	public void deleteactivity(String name) {
+		ActivityServices activityServices=new ActivityServices();
+
+		activityServicesRepo.delete(activityServices);
+	}
+
+
 }
