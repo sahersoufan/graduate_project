@@ -5,23 +5,20 @@
                         <aside class="widget-area">
                             <!-- widget single item start -->
                             <div class="card widget-item">
-                                <h4 class="widget-title">My Work</h4>
+                                <h4 class="widget-title">{{user.firstname}} {{user.lastname}}</h4>
                                 <div class="widget-body">
                                     <ul class="like-page-list-wrapper">
                                         <li class="unorder-list">
                                             <!-- profile picture end -->
-                                            <div class="profile-thumb">
-                                                <a href="#">
-                                                    <figure class="profile-thumb-small">
-                                                        <img src="assets/images/profile/profile-small-9.jpg" alt="profile picture">
-                                                    </figure>
-                                                </a>
-                                            </div>
+                                         
                                             <!-- profile picture end -->
 
                                             <div class="unorder-list-info">
-                                                <h3 class="list-title"><a href="#">Any one can join with us if you want</a></h3>
-                                                <p class="list-subtitle">5 min ago</p>
+                                                <h3 class="list-title">Welcome in Exchange Platform</h3>
+
+                                                 <h4 class="list-title" v-if="user.description!=null">about your self:</h4>
+                                                  <p class="list-subtitle" v-if="user.description!=null">{{user.description}}</p>
+                                                     <p class="list-subtitle"><center>you have <strong> {{count}}</strong> friends</center></p>
                                             </div>
                                         </li>
                                   
@@ -29,6 +26,32 @@
                                    
                                     
                                     </ul>
+                                </div>
+                            </div>  <div class="card widget-item" style='position: sticky;'>
+                                <div class="about-me">
+                                     <h4 class="widget-title">Last Activity</h4>
+                                     <div class="col-lg-12">
+
+                                                <h6 class="author" v-if="active.length<0 "  > you dont have any activity </h6>
+                                              
+                                                 
+                                            </div>
+                                       <div  v-for="(a,k) in active" :key="k">
+                                           
+
+                                            <div class="col-lg-12">
+
+                                                <h6 class="author" v-if="a.name==='add' "  > you add anew services </h6>
+                                                <p class="" v-if="a.name==='add'" >services: {{a.servicesname}} </p><br>
+
+                                                 <h6 class="author" v-if="a.name==='edit' "  > you edit information services </h6>
+                                                <p class="" v-if="a.name==='edit'" >services {{a.servicesname}} </p><br>
+                                            
+                                            </div>
+                                             
+                                        </div>
+                                   
+                         
                                 </div>
                             </div>
                             <!-- widget single item end -->
@@ -68,19 +91,32 @@
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title">Add services</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"  @click="delactive()">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body custom-scroll signup-inner--form">
                                                    <input type="text" class="single-field" placeholder="name service"  v-model="form.serviceName" >
                                                    <input type="text" class="single-field" placeholder="description"  v-model="form.description" >
-                                            </div>
+                                            
+                                                 <i  @click="$refs.file.click()" class="fa fa-camera" style='font-size:24px;'  ></i>
+                                                             
+
+                                                    <input type="file" ref="file" @change="uploadFile"  style="display: none"   multiple>
+                                                    <div style="overflow: hidden; display: flex; justify-content:space-around;">
+                                                    <div v-for="(image, key) in images" :key="key"  >
+                                                        <div>
+                                                            <img class="preview" v-bind:ref="'image' +parseInt( key )" width="100px" height="100px"  /> 
+                                                        
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                    </div>
                                             <div class="modal-footer">
                                                   <button type="button" class="post-share-btn" data-dismiss="modal"  @click="services()" >add
                                                     <span aria-hidden="true"></span>
                                                 </button>
-                                                <button type="button" class="post-share-btn" data-dismiss="modal">cancel</button>
+                                                <button type="button" class="post-share-btn" data-dismiss="modal"  @click="delactive()">cancel</button>
                                                
                                                
                                             </div>
@@ -90,13 +126,13 @@
                                 <!-- Modal end -->
                             </div>
                         </div>
-                        <!-- share box end -->
+                      
 
 
                         <!-- post status start -->
                         <div class="card"  v-for="(service,k) in allservices" :key="k">
                             <!-- post title start -->
-                            <div class="post-title d-flex align-items-center">
+                            <div class="msg-list-item d-flex justify-content-between">
                                 <!-- profile picture end -->
                                 <div class="profile-thumb">
                                     <a href="#">
@@ -106,12 +142,11 @@
                                     </a>
                                 </div>
                                 <!-- profile picture end -->
-                                   <div class="posted-author">
+                                   <div class="msg-content">
                                     <h6 class="author"><a href="profile.html">{{user.firstname }} {{user.lastname}}</a></h6>
-                                   
+                                     <span class="post-time">{{user.createdAt}}</span>
                                 </div>
-
-
+                                
                                 <div class="post-settings-bar">
                                     <span></span>
                                     <span></span>
@@ -129,31 +164,91 @@
                             <div class="post-content">
 
                                  <h6 class="author"  >{{service.serviceName}}</h6>
-                                 <p class="post-desc pb-0" >{{service.description}} </p>
+                                 <p  class="post-desc" >{{service.description}} </p>
 
 
                           
                              
                             </div>
+                             <div class="post-thumb-gallery img-gallery">
+                                    <div class="row no-gutters">
+                                        <div class="col-12">
+                                             
+                                               <figure class="post-thumb" v-if="allservices[k].image.length===1"   >
+                                                        <a class="gallery-selector" href="">
+                                                            <img :src="require('../../../../../user-photos/'+allservices[k].image[0].imagePath)"  alt="post image">
+                                                        </a>
+                                                    </figure>
+                                                      <carousel-3d  :width="400" :height="200"  v-if="allservices[k].image.length>1">           
+                                                        <slide v-for="(img,i) in allservices[k].image" :key="i" :index="i" >
+                                                            <template slot-scope="{ index, isCurrent, leftIndex, rightIndex }">
+                                                                <img :data-index="index" :class="{ current: isCurrent, onLeft: (leftIndex >= 0), onRight: (rightIndex >= 0) }" :src="require('../../../../../user-photos/'+img.imagePath)">
+                                                            </template>
+                                                        </slide>
+                                                    </carousel-3d>
+                                        </div>
+                                         
+                                    </div>
+                                </div>
+                                <div class="post-meta">
+                                    <!-- <button class="post-meta-like">
+                                        <i class="bi bi-heart-beat"></i>
+                                        <span>You and 207 people like this</span>
+                                        <strong>207</strong>
+                                    </button> -->
+                                    <ul class="comment-share-meta">
+                                        <li>
+                                            <button class="post-comment">
+                                                <i class="bi bi-chat-bubble"></i>
+                                                <span>41</span>
+                                            </button>
+                                        </li>
+                                      
+                                    </ul>
+                                </div>
                         </div>
                          <div class="modal fade" id="textbox1" aria-labelledby="textbox">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title">Edit services</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="delactive()">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body custom-scroll signup-inner--form">
                                                    <input type="text" class="single-field" placeholder="name service"  v-model="form.serviceName" >
                                                    <input type="text" class="single-field" placeholder="description"  v-model="form.description" >
-                                            </div>
+                                                                  <i  @click="$refs.f.click()" class="fa fa-camera" style='font-size:24px;'  ></i>
+                                                             
+
+                                                    <input type="file" ref="f" @change="uploadFile1"  style="display: none"   multiple>
+                                                    <div style="overflow: hidden; display: flex; justify-content:space-around;">
+                                                    <div  v-if="uplod===true"  style="overflow: hidden; display: flex; justify-content:space-around;">
+                                                    <div v-for="(image, key) in imagesedit" :key="key"  >
+                                                        <div>
+                                                            <img class="preview1" v-bind:ref="'imageedit' +parseInt( key )" width="100px" height="100px"  /> 
+                                                        
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                    <div v-if="uplod==false "  style="overflow: hidden; display: flex; justify-content:space-around;">
+                                                        <div   v-for="(img,i) in form.image" :key="i" >           
+                                                       
+                                                             <img  :src="require('../../../../../user-photos/'+img.imagePath)">
+                                                         
+                                                    </div>
+                                                    </div>
+                                                    </div>
+                                           
+                                           
+                                           
+                                           </div>
                                             <div class="modal-footer">
                                                   <button type="button" class="post-share-btn" data-dismiss="modal"  @click="update()" >edit
                                                     <span aria-hidden="true"></span>
                                                 </button>
-                                                <button type="button" class="post-share-btn" data-dismiss="modal">cancel</button>
+                                                <button type="button" class="post-share-btn" data-dismiss="modal" @click="delactive()">cancel</button>
                                                
                                                
                                             </div>
@@ -210,6 +305,7 @@
 
 
 
+import {Carousel3d,Slide } from 'vue-carousel-3d';
 
  import VueUploadMultipleImage from 'vue-upload-multiple-image'
  import Cookies from 'js-cookie'
@@ -224,12 +320,25 @@
             {
                 serviceName: '',
                 description:'',
-                id:''
+                id:'',
+                createdAt:'',
+                    image:[{
+               id:null,
+                imagePath:null
+
+           }]
             }
         ],
         form:{
                 serviceName: '',
                 description:'',
+                   id:'',
+                createdAt:'',
+                image:[{
+               id:null,
+                imagePath:null
+
+           }]
             
         },
                user: {
@@ -246,7 +355,26 @@
           phone:null,
           description:null,
         
-        },
+        },active:[{
+            id:null,
+            name:null,
+            servicesname:null,
+        }],
+        count:null,
+            allimage:[
+    [{
+
+           id:null,
+           imagePath:null
+           }],
+
+       ],
+       files: [],
+       images:[],
+       imagesedit:[],
+        msg: [],
+              uplod:null,
+          
        
        
       
@@ -255,8 +383,9 @@
       }
     },/* eslint-disable */
     components: {
-	    VueUploadMultipleImage,
-	  }/* eslint-disable */
+    Carousel3d,
+    Slide
+  }/* eslint-disable */
       ,created(){
      
           this.$axios.get('/api/islog')
@@ -276,19 +405,8 @@
                 console.log("islog errrore")
               )
 
-             this.$axios.get('/api/services/all')
-              .then(res => {
-
-                    console.log("all services",res)  ; 
-                    this.allservices=res.data;
-                     console.log("services",this.allservices)  ; 
-                                   
-           
-              })
-              .catch(
-                
-                console.log("islog errrore")
-              )
+              this.getallservices();
+                             
               
               /** ------------------------------------------------------------------- */
                 var username= Cookies.get('user')
@@ -315,52 +433,116 @@
                 )
   
                /** ------------------------------------------------------------------- */   
-   
+this.activity();
+// /    ------------------------------------------
 
-
-
-   
-  },
-    methods:{
-     
-
-  
-        services(){
-
-               this.$axios.post('/api/services/add',this.form)
+   this.$axios.get('/api/friends/count')
               .then(res => {
 
-                      console.log("services",  res)
-                        //  User.responseAfterLogin(res)
-                        if(res.data==true){
-                             this.$Toast.fire({
-                            icon: 'success',
-                            title: "successfly Addes"
-                          }) 
-                           this.$axios.get('/api/services/all')
-                  .then(res => {
-                  this.allservices=null;
-
-                    console.log("all services",res)  ; 
-                    this.allservices=res.data;
-                     console.log("services",this.allservices)  ; 
+                  
+                    this.count=res.data;
+                     console.log("countt",this.count)  ; 
                                    
            
               })
               .catch(
                 
-                console.log("islog errrore")
-              ) 
+                console.log("count errrore")
+              )
+
+   
+  },
+    methods:{
+        delactive(){
+             this.imagesedit=[];
+              this.images=[];
+              this.uplod=null;
+              this.form={};
+
+        }, 
+   uploadFile (event) {
+      
+           this.images.length=0;
+         
+        this.files = event.target.files
+        var selectedFiles = event.target.files;
+        for (let i=0; i < selectedFiles.length; i++){
+            this.images.push(selectedFiles[i]);
+        }
+
+        for (let i=0; i<this.images.length; i++){
+            let reader = new FileReader(); //instantiate a new file reader
+            reader.addEventListener('load', function(){
+            this.$refs['image' + parseInt( i )][0].src = reader.result;
+            }.bind(this), false);  //add event listener
+
+            reader.readAsDataURL(this.images[i]);
+        }
 
 
+        },
+            uploadFile1 (event) {
+       this.uplod=true;
+           this.imagesedit.length=0;
+         
+        this.files = event.target.files
+        var selectedFiles = event.target.files;
+        for (let i=0; i < selectedFiles.length; i++){
+            this.imagesedit.push(selectedFiles[i]);
+        }
 
-                        }else{
-                                this.$Toast.fire({
-                                icon: 'error',
-                                title: 'Sorry but something wrong'
-                            })
+        for (let i=0; i<this.imagesedit.length; i++){
+            let reader = new FileReader(); //instantiate a new file reader
+            reader.addEventListener('load', function(){
+            this.$refs['imageedit' + parseInt( i )][0].src = reader.result;
+            }.bind(this), false);  //add event listener
 
+            reader.readAsDataURL(this.imagesedit[i]);
+        }
+          
+            console.log("editttimageee",this.editwork.image);
+
+        }, 
+  
+        services(){
+               const formData = new FormData();
+          for (const i of Object.keys(this.files)) {
+            formData.append('files', this.files[i])
+          }
+ var currentDate = new Date();
+             this.form.createdAt=currentDate;
+               this.$axios.post('/api/services/add',this.form)
+              .then(res => {
+
+                      console.log("services",  res)
+                           let id=res.data;
+                        if(id!==0){
+                                this.$axios.post('/api/services/addimage/'+id,formData  )
+                                .then(resp => {
+                                    if(resp.data===true){
+                                       
+                                    }
+                            
+                                
+                            console.log(resp);
+                                })
+                 
                         }
+                             this.form={};
+                                          this.activity();
+                                         this.$Toast.fire({
+                                            icon: 'success',
+                                            title: "successfly Addes"
+                                        }) 
+
+                        
+                        
+                  this.getallservices();
+                             
+
+
+
+                     
                                           
          
 
@@ -377,16 +559,39 @@
 
         },
       update(){
+
+            const formData = new FormData();
+          for (const i of Object.keys(this.files)) {
+            formData.append('files', this.files[i])
+          }
              this.$axios.put('/api/services/update',this.form)
               .then(res => {
 
                     console.log("services",res.data)  ; 
                      if(res.data==true){
-                             this.$Toast.fire({
-                            icon: 'success',
-                            title: "successfully update"
-                          }) }
-                    
+                                  this.$axios.post('/api/services/updateimage/'+this.form.id,formData  )
+                                .then(resp => {
+                                    if(resp.data===true){
+                                        
+                                          this.activity();
+                                         this.$Toast.fire({
+                                            icon: 'success',
+                                            title: "successfly Edit"
+                                        }) 
+                                    }else{
+                                           this.$Toast.fire({
+                                            icon: 'error',
+                                            title: 'Sorry but something wrong'
+                                        })
+                                    }
+                            
+                                
+                            console.log(resp);
+                                })
+                 
+                          
+                          }
+                    this.getallservices();
                              
            
               })
@@ -395,12 +600,46 @@
                 console.log("")
               )
 
-        this.$axios.get('/api/services/all')
-              .then(res => {
+     
+               this.message=null;
+                var element = document.getElementById("tow");
+                  element.classList.add("active");
+                  element.classList.add("show");
+        }, 
+        getallservices(){
+               this.$axios.get('/api/services/all')
+              .then(resp => {
 
-                    console.log("all services",res)  ; 
-                    this.allservices=res.data;
-                     console.log("services",this.allservices)  ; 
+                    // console.log("all services",res)  ; 
+                    // this.allservices=res.data;
+                    //  console.log("services",this.allservices)  ; 
+
+
+
+                     /////////////////////////////////
+
+                       this.allservices=resp.data[0];
+                        console.log(this.allservices,resp.data,"allservices resp")
+                       for(let i=0;i<this.allservices.length;i++){
+
+                                  let j=i+1;
+                                   
+                                    // console.log(this.allwork[i],this.allwork[i].image,"immmmmmmmm resp")
+                                     for(let k=0;k<resp.data[j].length;k++){
+                                          resp.data[j][k].imagePath=   resp.data[j][k].imagePath.split('\\')[   resp.data[j][k].imagePath.split('\\').length - 3]+'/'+
+                                   resp.data[j][k].imagePath.split('\\')[   resp.data[j][k].imagePath.split('\\').length - 2]+'/'+
+                                  resp.data[j][k].imagePath.split('\\')[  resp.data[j][k].imagePath.split('\\').length - 1];
+
+ console.log( resp.data[j][k],"image ")
+ var m='../../../../../user-photos/'+resp.data[j][k].imagePath;
+                                   // this.view.push(m);
+                                    
+ 
+                                     }
+
+                                      this.allservices[i].image=resp.data[j]; 
+                                      console.log(this.view,this.allservices[i].image,"immmmmmmmm resp")
+                       }
                                    
            
               })
@@ -408,26 +647,21 @@
                 
                 console.log("islog errrore")
               )
-               this.message=null;
-                var element = document.getElementById("tow");
-                  element.classList.add("active");
-                  element.classList.add("show");
-        },       edit(id){
+        },
+        edit(id){
+             this.form={};
+               for(let i=0;i<this.allservices.length;i++){
+                 if(this.allservices[i].id===id){
+                     this.form=this.allservices[i];
+                     console.log("edittttt",this.form);
+                     this.uplod=false;
+                     
+                 }
+             }
             
            
-              this.$axios.get('/api/services/'+id)
-              .then(res => {
-
-                    console.log("services",res.data)  ; 
-                    this.form=res.data;
-                     console.log("services",this.form)  ; 
-                                   
-           
-              })
-              .catch(
-                
-                console.log("")
-              )
+          
+              
 
         },
         Delete(id){
@@ -460,6 +694,21 @@
                 )
               }
             })
+               this.getallservices();
+                             
+
+        },
+        activity(){
+              this.$axios.get('/api/services/activity')
+              .then(res => {
+                  this.active=res.data;
+                  let k=0;
+                  console.log(res.data,this.active,"activvvv");                 
+              })
+              .catch(
+                
+                console.log("active errore")
+              )
 
         }
 /* eslint-disable */

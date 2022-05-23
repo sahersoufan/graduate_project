@@ -45,11 +45,13 @@
                                     <nav>
                                         <ul class="main-menu">
                                              <li v-on:click="call('services')"><router-link to="" >Services</router-link></li>
-                                            <li><a href="">Work</a></li>
+                                           <li v-on:click="call('work')"><router-link to="" >Work</router-link></li>
+                                
                                             
                                             <li v-on:click="call('friends')"><router-link to="" >Friends</router-link></li>
                                            
                                              <li v-on:click="call('setting')"><router-link to="" >Setting</router-link></li>
+                                               
                                             <!-- <li class="d-inline-block d-md-none"><a href="profile.html">edit profile</a></li> -->
                                         </ul>
                                     </nav>
@@ -96,6 +98,7 @@
               <Setting v-if="message === 'setting'"></Setting>
                <Services v-if="message === 'services'"></Services>
                <Friends v-if="message === 'friends'"></Friends>
+               <Work v-if="message === 'work'"></Work>
             </div>
             <!-- about author details start -->
         
@@ -120,6 +123,7 @@ import Setting from './setting.vue';
  import Cookies from 'js-cookie'
 import Services from './services.vue';
 import Friends from './friends.vue';
+import Work from './work.vue';
   export default {
 
     data() {
@@ -140,7 +144,8 @@ import Friends from './friends.vue';
      components: {
     Setting,
     Services,
-    Friends
+    Friends,
+    Work
 },created(){
      
           this.$axios.get('/api/islog')

@@ -164,19 +164,31 @@
                          <div class="col-lg-4">
                               <div class="card widget-item" style='position: sticky;'>
                                 <div class="about-me">
-                                     <h4 class="widget-title">Shortcuts</h4>
+                                     <h4 class="widget-title">Last Activity</h4>
                                    
                                     <div class="card widget-item">
-                                <div class="about-me">
-                                    <ul class="nav flex-column about-author-menu">
-                                        
-                                        <li><a href="#" data-toggle="tab">Services</a></li>
-                                        <li><a href="#" data-toggle="tab">Setting </a></li>
-                                        <li><a href="#" data-toggle="tab">Messages</a></li>
-                                        <li><a href="#" data-toggle="tab">Logout</a></li>
-                                    
-                                    </ul>
-                                </div>
+                                <div class="col-lg-12">
+
+                                                <h6 class="author" v-if="active.length<0 "  > you dont have any activity </h6>
+                                              
+                                                 
+                                            </div>
+                                       <div  v-for="(a,k) in active" :key="k">
+                                           
+
+                                            <div class="col-lg-12">
+
+                                                <h6 class="author" v-if="a.name==='add' && a.type==='send'"  > send friend request to: </h6>
+                                                <p class="" v-if="a.name==='add'  && a.type==='send'" > {{a.friendname}} </p><br>
+                                                 <h6 class="author" v-if="a.name==='add' && a.type==='accept'"  > accept friend request to: </h6>
+                                                <p class="" v-if="a.name==='add'  && a.type==='accept'" > {{a.friendname}} </p><br>
+
+
+                                             
+                                            
+                                            </div>
+                                             
+                                        </div>
                             </div>
                                 </div>
                             </div>
@@ -251,12 +263,12 @@ const customLabels = {
         pageOfItems:[],
         pageOfrequest:[],
         pageOffriend:[],
-      
-       
-       
-      
-     
+        active:[{
+          id:null,
+          name:null,
+          friendname:null,
 
+        }]
       }
     },/* eslint-disable */
     components: {
@@ -393,7 +405,7 @@ const customLabels = {
                 console.log("alll user error")
               )
 
-
+this.activity();
 
    
   },
@@ -420,6 +432,7 @@ const customLabels = {
               .then(res => {
 
                        if(res.data==true){
+                         this.activity();
                              this.$Toast.fire({
                             icon: 'success',
                             title: "send request"
@@ -443,13 +456,13 @@ const customLabels = {
                 
                 console.log("errore add request friend")
               )
+              
 
         },
-  
-      
         confirm(id){
            this.$axios.post('/api/friends/add/'+id)
               .then(res => {
+                this.activity();
 
                        if(res.data==true){
                              this.$Toast.fire({
@@ -554,7 +567,6 @@ const customLabels = {
 
 
         },
-    
         Delete(id){
                  Swal.fire({
               title: 'Are you sure?',
@@ -573,6 +585,7 @@ const customLabels = {
                 this.allrequest = this.allrequest.filter(an => {
                   return an.id != id
                 })
+                
                  this.$axios.post('/api/all')
               .then(res => {
 
@@ -733,7 +746,21 @@ const customLabels = {
                   element.classList.add("active");
                   element.classList.add("show");
             
-        },
+        },     
+        activity(){
+              this.$axios.get('/api/friendrequest/activity')
+              .then(res => {
+                  this.active=res.data;
+                  let k=0;
+                  console.log(res.data,this.active,"activvvv");
+                               
+              })
+              .catch(
+                
+                console.log("")
+              )
+
+        }
 /* eslint-disable */
 
 

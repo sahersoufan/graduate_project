@@ -1,9 +1,6 @@
 package com.grad.exchangesys.Controller;
 
-import com.grad.exchangesys.Model.FriendRequest;
-import com.grad.exchangesys.Model.FriendsList;
-import com.grad.exchangesys.Model.ServiceModel;
-import com.grad.exchangesys.Model.User;
+import com.grad.exchangesys.Model.*;
 import com.grad.exchangesys.Services.FriendRequestServices;
 import com.grad.exchangesys.Services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +25,7 @@ public class FriendRequestController {
     private final UserService userService;
     private final FriendRequestServices friendRequestServices;
 
+
     @PostMapping(value = "/add/{id}")
     public Boolean addFriends(@PathVariable("id") Long id, HttpServletRequest request){
         FriendRequest friendRequest=new FriendRequest();
@@ -36,6 +34,12 @@ public class FriendRequestController {
         User user1=userService.getUser(id);
         friendRequest.setUser(user1);
         friendRequestServices.AddRequest(friendRequest);
+        ActivityFriends activityFriends=new ActivityFriends();
+        activityFriends.setName("add");
+        activityFriends.setFriendname(user1.getFirstname());
+        activityFriends.setType("send");
+        activityFriends.setUser(user);
+        friendRequestServices.saveactivity(activityFriends);
         if(friendRequestServices.AddRequest(friendRequest))
             return true;
         return false;
@@ -76,5 +80,11 @@ public class FriendRequestController {
 
         return new ResponseEntity<String>("Service Deleted Successfully!.", HttpStatus.OK);
 
+    }
+
+    @GetMapping("/activity")
+    public List<ActivityFriends> getactivity(HttpServletRequest request){
+        User user=userService.getUser(request);
+        return friendRequestServices.getActivate(user);
     }
 }

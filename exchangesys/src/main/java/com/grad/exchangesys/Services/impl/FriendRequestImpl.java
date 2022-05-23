@@ -1,6 +1,9 @@
 package com.grad.exchangesys.Services.impl;
 
+import com.grad.exchangesys.Model.ActivityFriends;
 import com.grad.exchangesys.Model.FriendRequest;
+import com.grad.exchangesys.Model.User;
+import com.grad.exchangesys.Repository.ActivityFriendsRepo;
 import com.grad.exchangesys.Repository.FriendRequestRepo;
 import com.grad.exchangesys.Services.FriendRequestServices;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FriendRequestImpl implements FriendRequestServices {
     private final FriendRequestRepo friendRequestRepo;
+    private final ActivityFriendsRepo activityFriendsRepo;
     @Override
     public boolean AddRequest(FriendRequest friendRequest) {
 
@@ -44,5 +48,15 @@ public class FriendRequestImpl implements FriendRequestServices {
     @Override
     public List<FriendRequest> allrequesttouser(long id) {
         return friendRequestRepo.allrequesttouser(id);
+    }
+
+    @Override
+    public List<ActivityFriends> getActivate(User user) {
+        return activityFriendsRepo.findTop3ByUserOrderByIdDesc(user);
+    }
+
+    @Override
+    public ActivityFriends saveactivity(ActivityFriends activityFriends) {
+        return activityFriendsRepo.save(activityFriends);
     }
 }

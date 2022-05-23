@@ -14,5 +14,6 @@ public interface FriendsService {
      List<User> getusersFriend(Long id);
      FriendsList getFriend(Long user_id,Long f_id);
      Boolean  deleteFriend(FriendsList friendsList);
+     long getcount(long id);
 
 }
