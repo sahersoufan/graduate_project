@@ -25,7 +25,6 @@ public class FCMService {
         logger.info("Sent message with data. Topic: " + request.getTopic() + ", " + response);
     }
     
-    
     public void sendMessageWithoutData(PushNotificationRequest request)
             throws InterruptedException, ExecutionException {
     	
