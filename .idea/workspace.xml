@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0f05207c-8ebb-4a25-b115-326453f3be4d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/exchangesys/src/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/exchangesys/src/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exchangesys/src/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/exchangesys/src/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exchangesys/src/frontend/public/user/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/exchangesys/src/frontend/public/user/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exchangesys/src/frontend/src/components/user/friends.vue" beforeDir="false" afterPath="$PROJECT_DIR$/exchangesys/src/frontend/src/components/user/friends.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exchangesys/src/frontend/src/components/user/home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/exchangesys/src/frontend/src/components/user/home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exchangesys/src/frontend/src/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/exchangesys/src/frontend/src/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exchangesys/src/frontend/src/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/exchangesys/src/frontend/src/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exchangesys/src/main/java/com/grad/exchangesys/Controller/WorksLogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/exchangesys/src/main/java/com/grad/exchangesys/Controller/WorksLogController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exchangesys/src/main/java/com/grad/exchangesys/Model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/exchangesys/src/main/java/com/grad/exchangesys/Model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exchangesys/src/main/java/com/grad/exchangesys/Model/WorkLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/exchangesys/src/main/java/com/grad/exchangesys/Model/WorkLog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exchangesys/src/main/java/com/grad/exchangesys/Repository/WorkLogRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/exchangesys/src/main/java/com/grad/exchangesys/Repository/WorkLogRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exchangesys/src/main/java/com/grad/exchangesys/Services/WorkLogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/exchangesys/src/main/java/com/grad/exchangesys/Services/WorkLogService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exchangesys/src/main/java/com/grad/exchangesys/Services/impl/WorkLogserviceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/exchangesys/src/main/java/com/grad/exchangesys/Services/impl/WorkLogserviceImpl.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="29Lmy2wQw4OUqFJd9mUhq6tiVQa" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/exchangesys" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0f05207c-8ebb-4a25-b115-326453f3be4d" name="Default Changelist" comment="" />
+      <created>1652900990297</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1652900990297</updated>
+      <workItem from="1652900995505" duration="75000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="463" y="124" key="FileChooserDialogImpl" timestamp="1652901070465">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="463" y="124" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1652901070465" />
+  </component>
+</project>

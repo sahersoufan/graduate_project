@@ -9,4 +9,5 @@ import java.util.List;
 public interface ServiceRepo extends JpaRepository<ServiceModel, Long>{
 
     List<ServiceModel> findAllByUser(User user);
+    ServiceModel findByServiceName(String servicesname);
 }

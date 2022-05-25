@@ -7,6 +7,7 @@ let setting = require('./components/user/setting.vue').default;
 let services = require('./components/user/services.vue').default;
 let complaints=require('./components/admin/complaints.vue').default;
 let friends=require('./components/user/friends.vue').default;
+let work=require('./components/user/work.vue').default;
 
 export const routes = [
     { path: '/signup', component: signup, name:'/signup'},
@@ -16,6 +17,7 @@ export const routes = [
     { path: '/setting', component: setting, name:'/setting'},
     { path: '/services', component: services, name:'/services'},
     { path: '/friends', component: friends, name:'/friends'},
+    { path: '/work', component: work, name:'/work'},
 
 
 

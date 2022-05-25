@@ -43,9 +43,6 @@ public class User implements Serializable {
         this.imagepath = imagepath;
     }
 
-    public String getProfilepath() {
-        return profilepath;
-    }
 
     public void setProfilepath(String profilepath) {
         this.profilepath = profilepath;
