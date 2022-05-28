@@ -13,7 +13,7 @@ public interface OffersServices {
     List<Offers>getAllOffers(Long id_user);
     List<OrderRequest> getAll_Offers_Request(Long id);
 
-    void AcceptOrder( Long id_RequestOrder);
+    Boolean AcceptOrder( Long id_RequestOrder);
     void deleteOrder(Long id_reqest);
 //    List<OrderAccept> getallOrders(Long id);
 //    List<OrderAccept> ViesAllServiesProvider(Long id);

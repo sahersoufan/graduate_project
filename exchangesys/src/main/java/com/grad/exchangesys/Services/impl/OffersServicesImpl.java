@@ -46,15 +46,18 @@ public class OffersServicesImpl implements OffersServices {
     }
 
     @Override
-    public void AcceptOrder(Long id_offer) {
+    public Boolean AcceptOrder(Long id_offer) {
         OrderRequest orderRequest= new OrderRequest();
         Offers accept = new Offers();
         orderRequest = requestRepo.getById(id_offer);
 
-        accept= accept.convertObject(orderRequest);
-        offersRepo.save(accept);
-        requestRepo.delete(orderRequest);
-
+        if(orderRequest!= null) {
+            accept = accept.convertObject(orderRequest);
+            offersRepo.save(accept);
+            requestRepo.delete(orderRequest);
+            return true;
+        }
+        return false;
     }
 
     @Override

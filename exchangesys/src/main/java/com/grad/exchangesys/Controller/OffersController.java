@@ -27,7 +27,7 @@ public class OffersController {
         return  offersServices.getAllOffers(user.getId());
     }
 
-    @GetMapping("/Requests")
+    @GetMapping("/requests")
     public List<OrderRequest> getAll_Offers_Requests(HttpServletRequest request){
         User user = userService.getUser(request);
         return  offersServices.getAll_Offers_Request(user.getId());

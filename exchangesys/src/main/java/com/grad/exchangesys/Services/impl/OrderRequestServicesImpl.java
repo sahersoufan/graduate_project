@@ -60,21 +60,25 @@ public class OrderRequestServicesImpl implements OrderRequestServices {
     }
 
     @Override
-    public void add_Order(OrderRequest order) {
+    public OrderRequest add_Order(OrderRequest order) {
 
         order.setIs_offer(false);
-        requestRepo.save(order);
+        return requestRepo.save(order);
     }
 
     @Override
-    public void AcceptOrder(Long id_RequestOrder) {
+    public Boolean AcceptOrder(Long id_RequestOrder) {
         OrderRequest orderRequest= new OrderRequest();
         Orders accept = new Orders();
         orderRequest = requestRepo.getById(id_RequestOrder);
 
-        accept= accept.convertObject(orderRequest);
-        ordersRepo.save(accept);
-        requestRepo.delete(orderRequest);
+        if(orderRequest !=null) {
+            accept = accept.convertObject(orderRequest);
+            ordersRepo.save(accept);
+            requestRepo.delete(orderRequest);
+            return true;
+        }
+        return false;
     }
 
 //    @Override

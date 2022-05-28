@@ -10,8 +10,8 @@ public interface OrderRequestServices {
 
     List<OrderRequest> viewAllServicesRequest(Long id);
     String Offer_service_TO_user(String service_name, Long id_other_user, Long id_my_user );
-    void add_Order(OrderRequest orders) ;
-    void AcceptOrder( Long id_RequestOrder);
+    OrderRequest add_Order(OrderRequest orders) ;
+    Boolean AcceptOrder( Long id_RequestOrder);
 //    void AcceptOffer( Long id_RequestOrder);
     void CancelOrder(Long id_reqest);
 

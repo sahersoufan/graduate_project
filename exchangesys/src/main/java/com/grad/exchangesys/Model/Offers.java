@@ -19,7 +19,7 @@ import static javax.persistence.GenerationType.AUTO;
 public class Offers {
 
     @Id
-    @GeneratedValue(strategy = AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String servicename;
 

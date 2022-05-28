@@ -23,7 +23,7 @@ public class OrdersController {
     @GetMapping("/")
     public List<Orders> getAllOrders(HttpServletRequest request){
         User user = userService.getUser(request);
-        System.out.println("ffdfgd");
+//        System.out.println("get orders  :  "+ ordersServices.getAll_Orders_Request(user.getId()));
           return  ordersServices.getAllOrders(user.getId());
     }
 //    @GetMapping("/Requests")
@@ -32,7 +32,7 @@ public class OrdersController {
 //        return  ordersServices.getAll_Orders_Request(user.getId());
 //    }
 
-    @DeleteMapping(value = "/delete{Id}")
+    @DeleteMapping("/delete/{Id}")
     public void Delete_Order(@PathVariable Long Id, HttpServletRequest request){
         ordersServices.delete_Order(Id);
     }

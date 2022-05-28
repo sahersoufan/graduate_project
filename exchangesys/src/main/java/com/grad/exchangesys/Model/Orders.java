@@ -20,9 +20,10 @@ public class Orders {
 
 
     @Id
-   @GeneratedValue(strategy = AUTO)
+   @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String serviceNmae;
+
 
     private String formName;
     private String ToName;
@@ -33,7 +34,7 @@ public class Orders {
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date date;
 
-
+    @GeneratedValue(strategy = AUTO)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Id_user")
     private User user;

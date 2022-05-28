@@ -17,7 +17,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/orders-requests")
+@RequestMapping("/api/ordersrequests")
 public class OrderRequestController {
 
   private final OrderRequestServices orderServices;
@@ -29,41 +29,50 @@ public class OrderRequestController {
   @GetMapping("/")
   public List<OrderRequest> getAll_Services_Requests(HttpServletRequest request){
     User user= userService.getUser(request);
+//    System.out.println("get request orders  :  "+ orderServices.viewAllServicesRequest(user.getId()));
    return orderServices.viewAllServicesRequest(user.getId());
   }
 
 
 
-  @PostMapping(value = "/add-order")
-  public void Add_Order(@RequestBody OrderRequest orders, HttpServletRequest request){
+  @PostMapping("/addorder")
+  public Boolean Add_Order(@RequestBody OrderRequest orders, HttpServletRequest request){
     User user = userService.getUser(request);
     orders.setUser(user);
-    orderServices.add_Order(orders);
+
+    if(orderServices.add_Order(orders)!=null)
+        return true;
+    return false;
   }
 
-  @GetMapping(value ="/accept-order{id}")
-  public void accept_order(@PathVariable Long id,HttpServletRequest request){
-      orderServices.AcceptOrder(id);
+  @GetMapping("/acceptorder/{id}")
+  public String accept_order(@PathVariable Long id,HttpServletRequest request){
+    if(orderServices.AcceptOrder(id))
+      return "Request accepted";
+  return "the order was deleted";
   }
 
-  @DeleteMapping("/delete{id}")
+  @DeleteMapping("/delete/{id}")
   public void delete_Request(@PathVariable Long id){
     orderServices.CancelOrder(id);
   }
 
-  @PostMapping(value = "/offer-service")
-  public void offer_service(@RequestBody OrderRequest orders,@RequestBody Long id_To_user ,HttpServletRequest request){
+  @PostMapping("/offerservice")
+  public String offer_service(@RequestBody OrderRequest orders,@RequestBody Long id_To_user ,HttpServletRequest request){
     User user = userService.getUser(request);
 //    orders.setUser(user);
 //    orders.setIdFrom(user.getId());
 //    orders.setFormN(user.getUsername());
 //    orders.setIdTo(id_To_user);
-    orderServices.Offer_service_TO_user(orders.getServiceNmae(),orders.getIdTo(),user.getId());
+       return orderServices.Offer_service_TO_user(orders.getServiceNmae(),orders.getIdTo(),user.getId());
   }
 
-  @GetMapping(value ="/accept-offer{id}")
-  public void accept_offer(@PathVariable Long id,HttpServletRequest request){
-    offersServices.AcceptOrder(id);
+  @GetMapping("/acceptoffer/{id}")
+  public String accept_offer(@PathVariable Long id,HttpServletRequest request){
+
+   if(offersServices.AcceptOrder(id))
+       return "Request accepted";
+    return "the order was deleted";
   }
 
 

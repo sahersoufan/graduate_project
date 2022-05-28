@@ -49,7 +49,7 @@ public class OrderServicesImpl implements OrdersServices {
     public List<OrderRequest> getAll_Orders_Request(Long id_user) {
         List<OrderRequest> myOrders = new ArrayList<>();
         for (OrderRequest o : orderRequestRepo.findAll()){
-            if(!o.getIs_offer() &&o.getIdTo() == id_user ){
+            if(!o.getIs_offer() && o.getIdTo() == id_user ){
                 myOrders.add(o);
             }
         }
