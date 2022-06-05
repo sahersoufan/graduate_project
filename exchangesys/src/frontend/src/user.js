@@ -8,8 +8,19 @@ import VueUploadMultipleImage from 'vue-upload-multiple-image'
 import JwPagination from 'jw-vue-pagination';
 import Carousel3d from 'vue-carousel-3d';
 import '@morioh/v-lightbox/dist/lightbox.css';
+import App from './components/user/mainhome.vue'
 
 import Lightbox from '@morioh/v-lightbox'
+// import firebaseMessaging from './firebase'
+
+// Vue.prototype.$messaging = firebaseMessaging
+
+
+
+
+
+
+
 
 // global register
 Vue.use(Lightbox);
@@ -56,6 +67,7 @@ const app=new Vue({
   components: {
     VueUploadMultipleImage,
   },
+  render: h => h(App)
 
 })
 /* eslint-disable */

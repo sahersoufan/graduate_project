@@ -134,7 +134,9 @@
                                               <div class="col-lg-3">
                                                 
                                            
-                                               <i v-if="friend.id != ''" @click="DeleteFriend(friend.id)" class='fas fa-trash' style='font-size:24px;color:red'></i>
+                                               <i v-if="friend.id != ''" @click="DeleteFriend(friend.id)" class='btn btn-sm fas fa-trash' style='font-size:24px;color:red'></i>
+                                           <router-link :to="{name: 'friendpage', params:{id:friend.id}}"  class="btn btn-sm " title="Show" style='font-size:24px;'><i class="fa fa-eye"></i></router-link>
+                                          
                                              
                                                  
                                                 
@@ -406,8 +408,11 @@ const customLabels = {
               )
 
 this.activity();
-
+  console.log('Firebase cloud messaging object=========', this.$messaging)
    
+  },
+   mounted () {
+    console.log('Firebase cloud messaging object=========', this.$messaging)
   },
     methods:{
      

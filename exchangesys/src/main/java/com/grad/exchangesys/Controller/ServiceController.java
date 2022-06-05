@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import com.grad.exchangesys.Model.*;
 import com.grad.exchangesys.Services.ServicesImageServices;
@@ -80,6 +81,43 @@ public class ServiceController {
 	@GetMapping("/all")
 	public List<Object> getAllServices(HttpServletRequest request){
 		User user=userService.getUser(request);
+		List<Object> list=new ArrayList<>();
+		List<ServiceModel> serviceModels=serviceService.getAllServices(user);
+		list.add(serviceModels);
+		for (ServiceModel serviceModel : serviceModels) {
+			list.add(servicesImageServices.getservicesimage(serviceModel.getId()));
+
+		}
+
+		return list;
+	}
+	@GetMapping("/allhomepage")
+	public List<Object> getServiceshomepage(HttpServletRequest request){
+		User user=userService.getUser(request);
+		List<Object> list=new ArrayList<>();
+		List<ServiceModel> serviceModels=serviceService.getServiceshomepage(user);
+		List<ServiceModel> serviceModelshome=new ArrayList<>();
+		Random rand = new Random();
+		for (int i=0;i<10;i++) {
+		ServiceModel serviceModel=	serviceModels.get(rand.nextInt(serviceModels.size()));
+
+		if(!serviceModelshome.contains(serviceModel))
+		serviceModelshome.add(serviceModel);
+
+		}
+
+
+		list.add(serviceModels);
+		for (ServiceModel serviceModel : serviceModelshome) {
+			list.add(servicesImageServices.getservicesimage(serviceModel.getId()));
+
+		}
+
+		return list;
+	}
+	@GetMapping("/all/{id}")
+	public List<Object> servicesfriend(@PathVariable Long id){
+		User user=userService.getUser(id);
 		List<Object> list=new ArrayList<>();
 		List<ServiceModel> serviceModels=serviceService.getAllServices(user);
 		list.add(serviceModels);

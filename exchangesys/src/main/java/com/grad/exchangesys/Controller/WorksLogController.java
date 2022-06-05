@@ -47,6 +47,21 @@ public class WorksLogController {
         return list;
 
     }
+    @GetMapping(value = "/all/{id}")
+    public List<Object> getworks(@PathVariable Long id){
+        User user=userService.getUser(id);
+        List<Object> list=new ArrayList<>();
+
+        List<WorkLog> workLogs=workLogservice.getAllWorks(user.getId());
+        list.add(workLogs);
+        for(int i=0;i<workLogs.size();i++){
+            list.add(workImageServices.getworkimage(workLogs.get(i).getId()));
+
+        }
+
+        return list;
+
+    }
     @GetMapping(value = "/allimage/{id}")
     public List<WorkImage> getimage(@PathVariable Long id) {
 

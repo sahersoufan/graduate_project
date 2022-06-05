@@ -12,8 +12,10 @@ import org.springframework.data.relational.core.sql.In;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +30,15 @@ public class FriendsController {
     private final FriendsService friendsServiceImpl;
     private final UserService userService;
     private final FriendRequestServices friendRequestServices;
+
+    @PostMapping(value = "/getfriend/{id}")
+    public ResponseEntity<User> getfriend(@PathVariable("id") Long id,HttpServletRequest request){
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/getuser").toUriString());
+
+        User user=userService.getUser(id);
+
+        return ResponseEntity.created(uri).body(user);
+    }
 
     @PostMapping(value = "/add/{id}")
     public Boolean addFriends(@PathVariable("id") Long id,HttpServletRequest request){
