@@ -1,32 +1,44 @@
 package com.grad.exchangesys.chat.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Id;
+import javax.persistence.*;
 
-import org.springframework.data.mongodb.core.mapping.Document;
+import com.grad.exchangesys.Model.User;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@Document
-public class ChatMessage {
-	
+@EnableAutoConfiguration
+public class ChatMessage implements Serializable {
+   private static final long serialVersionUID = 1L;
+
    @Id
-   private String id;
+   @GeneratedValue(strategy = GenerationType.AUTO)
+   private Long id;
    private String chatId;
-   private String senderId;
-   private String recipientId;
-   private String senderName;
-   private String recipientName;
+
+   @ManyToOne(fetch = FetchType.LAZY,optional = false)
+   @JoinColumn(name = "senderId")
+   private User user;
+
+   @ManyToOne(fetch = FetchType.LAZY,optional = false)
+   @JoinColumn(name = "recipientId")
+   private User user1;
+
    private String content;
    private Date timestamp;
+   @Enumerated(EnumType.STRING)
    private MessageStatus status;
-   
+
+
 }

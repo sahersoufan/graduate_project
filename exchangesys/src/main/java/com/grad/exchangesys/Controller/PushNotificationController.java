@@ -2,16 +2,14 @@ package com.grad.exchangesys.Controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.grad.exchangesys.Model.PushNotificationReponse;
 import com.grad.exchangesys.Model.PushNotificationRequest;
 import com.grad.exchangesys.Services.PushNotificationService;
 
 @RestController
+@RequestMapping(value = "api/notify")
 public class PushNotificationController {
 
 	

@@ -1,7 +1,9 @@
 package com.grad.exchangesys.chat.service;
 
+import java.util.List;
 import java.util.Optional;
 
+import com.grad.exchangesys.Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,37 +16,24 @@ public class ChatRoomService {
 	@Autowired 
 	private ChatRoomRepo chatRoomRepository;
 
-	
-	public Optional<String> getChatId(
-            String senderId, String recipientId, boolean createIfNotExist) {
+	public void saveroom(ChatRoom chatRoom){
+        chatRoomRepository.save(chatRoom);
 
-         return chatRoomRepository
-                .findBySenderIdAndRecipientId(senderId, recipientId)
-                .map(ChatRoom::getChatId)
-                 .or(() -> {
-                    if(!createIfNotExist) {
-                        return  Optional.empty();
-                    }
-                     var chatId =
-                            String.format("%s_%s", senderId, recipientId);
-
-                    ChatRoom senderRecipient = ChatRoom
-                            .builder()
-                            .chatId(chatId)
-                            .senderId(senderId)
-                            .recipientId(recipientId)
-                            .build();
-
-                    ChatRoom recipientSender = ChatRoom
-                            .builder()
-                            .chatId(chatId)
-                            .senderId(recipientId)
-                            .recipientId(senderId)
-                            .build();
-                    chatRoomRepository.save(senderRecipient);
-                    chatRoomRepository.save(recipientSender);
-
-                    return Optional.of(chatId);
-                });
     }
+    public long count() {
+        return chatRoomRepository.count();
+    }
+    public ChatRoom getroom(User user, User user1){
+	    if(chatRoomRepository.findByUserAndUser1(user, user1).isEmpty())
+      return  null ;
+	    return chatRoomRepository.findByUserAndUser1(user, user1).get();
+    }
+	public String getChatId(User sender, User recipient) {
+
+	    if(chatRoomRepository.findByUserAndUser1(sender, recipient).isEmpty())
+	        return null;
+          return chatRoomRepository.findByUserAndUser1(sender, recipient).get().getChatId();
+    }
+
+
 }

@@ -3,8 +3,10 @@ package com.grad.exchangesys.chat.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.grad.exchangesys.Model.User;
+import com.grad.exchangesys.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoOperations;
+
 import org.springframework.stereotype.Service;
 
 import com.grad.exchangesys.chat.model.ChatMessage;
@@ -12,9 +14,7 @@ import com.grad.exchangesys.chat.model.MessageStatus;
 import com.grad.exchangesys.chat.repository.ChatMessageRepo;
 import com.grad.exchangesys.exception.ResourceNotFoundException;
 
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
+
 
 @Service
 public class ChatMessageService {
@@ -24,9 +24,8 @@ public class ChatMessageService {
 	
     @Autowired 
     private ChatRoomService chatRoomService;
-    
-    @Autowired 
-    private MongoOperations mongoOperations;
+
+
     
     
     public ChatMessage save(ChatMessage chatMessage) {
@@ -35,42 +34,29 @@ public class ChatMessageService {
         return chatMessage;
     }
 
-    public long countNewMessages(String senderId, String recipientId) {
-        return repository.countBySenderIdAndRecipientIdAndStatus(
-                senderId, recipientId, MessageStatus.RECEIVED);
+    public long countNewMessages(User sender, User recipient) {
+        return repository.countByUserAndUser1AndStatus(
+                sender, recipient, MessageStatus.RECEIVED);
     }
 
-    public List<ChatMessage> findChatMessages(String senderId, String recipientId) {
-        var chatId = chatRoomService.getChatId(senderId, recipientId, false);
-
-        var messages =
-                chatId.map(cId -> repository.findByChatId(cId)).orElse(new ArrayList<>());
-
+    public List<ChatMessage> findChatMessages(User sender, User recipient) {
+        String chatId = chatRoomService.getChatId(sender, recipient);
+        List<ChatMessage> messages=repository.findByChatId(chatId);
         if(messages.size() > 0) {
-            updateStatuses(senderId, recipientId, MessageStatus.DELIVERED);
-        }
+            for (int i=0;i<messages.size();i++){
+                messages.get(i).setStatus(MessageStatus.DELIVERED);
+                repository.save(messages.get(i));
+            }
 
+        }
         return messages;
     }
 
-    public ChatMessage findById(String id) {
-        return repository
-                .findById(id)
-                .map(chatMessage -> {
-                    chatMessage.setStatus(MessageStatus.DELIVERED);
-                    return repository.save(chatMessage);
-                })
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("can't find message (" + id + ")"));
-    }
 
-    public void updateStatuses(String senderId, String recipientId, MessageStatus status) {
-        Query query = new Query(
-                Criteria
-                        .where("senderId").is(senderId)
-                        .and("recipientId").is(recipientId));
-        Update update = Update.update("status", status);
-        mongoOperations.updateMulti(query, update, ChatMessage.class);
+
+    public List<User> getuser(Long id){
+        return repository.getusers(id);
+
     }
     
     

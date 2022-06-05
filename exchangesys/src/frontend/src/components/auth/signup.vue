@@ -43,7 +43,7 @@
               <div class="row no-gutters">
                 <div class="col-lg-6 order-2 order-lg-1">
                   <div class="timeline-bg-content bg-img"><img src="../../assets/images/timeline/adda-timeline.jpg">
-                    <h3 class="timeline-bg-title">Let’s see what’s happening to you and your world. Welcome in Adda.</h3>
+                    <h3 class="timeline-bg-title">Let’s see what’s happening to you and your world. Welcome in Exchange services.</h3>
                   </div>
                 </div>
                 <div class="col-lg-6 order-1 order-lg-2 d-flex align-items-center justify-content-center">

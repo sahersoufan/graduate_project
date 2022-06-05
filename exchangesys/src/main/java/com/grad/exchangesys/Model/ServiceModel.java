@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -19,14 +20,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 
+import java.io.Serializable;
 import java.util.Date;
 
-@Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@EnableAutoConfiguration
-public class ServiceModel {
+@Entity @EnableAutoConfiguration
+@Data @NoArgsConstructor  @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class ServiceModel implements Serializable {
 
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;

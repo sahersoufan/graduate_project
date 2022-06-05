@@ -137,7 +137,7 @@
                                 <div class="profile-thumb">
                                     <a href="#">
                                         <figure class="profile-thumb-middle">
-                                            <img :src="require('../../../../../user-photos/'+user.imagepath)" alt="profile picture">
+                                            <img :src="require('../../../../../user-photos/'+user.imagepath)" alt="Avatar" style="width: 60px;height: 45px; border-radius: 50%;">
                                         </figure>
                                     </a>
                                 </div>
@@ -262,24 +262,30 @@
                         <aside class="widget-area">
                             <!-- widget single item start -->
                             <div class="card widget-item">
-                                <h4 class="widget-title">Recent Notifications</h4>
+                                <h4 class="widget-title">Services Request</h4>
                                 <div class="widget-body">
                                     <ul class="like-page-list-wrapper">
-                                        <li class="unorder-list">
+                                        <li class="unorder-list" v-for="(o,k) in orderconfirm" :key="k">
                                             <!-- profile picture end -->
                                             <div class="profile-thumb">
                                                 <a href="#">
                                                     <figure class="profile-thumb-small">
-                                                        <img src="assets/images/profile/profile-small-9.jpg" alt="profile picture">
+                                                        <img :src="require('../../../../../user-photos/'+o.customer.imagepath)" alt="Avatar" style="width: 60px;height: 45px; border-radius: 50%;" >
                                                     </figure>
                                                 </a>
                                             </div>
                                             <!-- profile picture end -->
 
-                                            <div class="unorder-list-info">
-                                                <h3 class="list-title"><a href="#">Any one can join with us if you want</a></h3>
-                                                <p class="list-subtitle">5 min ago</p>
-                                            </div>
+                                            <div class="unorder-list-info col-lg-9">
+                                                     <h6 class="author" v-if="o.customer.firstname!='' &&  o.customer.lastname!=''" >  <router-link :to="{name: 'friendpage', params:{id:o.customer.id}}"  >{{o.customer.firstname }} {{ o.customer.lastname}}</router-link></h6>  
+                                      
+                                                   <p class=""  >service Name:{{o.serviceModel.serviceName}} </p>
+                                      
+                                                <!-- <p class="list-subtitle">{{o.servicesModel.servicename}}</p> -->
+                                           
+                                             
+                                          
+                                           </div>
                                         </li>
                                   
                                   
@@ -329,6 +335,50 @@ import {Carousel3d,Slide } from 'vue-carousel-3d';
            }]
             }
         ],
+        orderconfirm: [
+            {
+                id:null,
+                isaccept:null,
+                 servicesModel:{
+                        serviceName: null,
+                        description:null,
+                        id:null,
+                },
+                customer: {
+        
+                        id:null,
+                        imagepath:null,
+                        profilepath:null,
+                                username: null,
+                        password: null,
+                        firstname:null,
+                        lastname:null,
+                        age:null,
+                        country:null,
+                        gender:null,
+                        phone:null,
+                        description:null,
+                
+                },
+                  provider: {
+        
+                        id:null,
+                        imagepath:null,
+                        profilepath:null,
+                                username: null,
+                        password: null,
+                        firstname:null,
+                        lastname:null,
+                        age:null,
+                        country:null,
+                        gender:null,
+                        phone:null,
+                        description:null,
+                
+                },
+               
+            }
+        ],
         form:{
                 serviceName: '',
                 description:'',
@@ -343,6 +393,7 @@ import {Carousel3d,Slide } from 'vue-carousel-3d';
         },
                user: {
         
+        id:null,
           imagepath:null,
           profilepath:null,
                    username: null,
@@ -406,7 +457,7 @@ import {Carousel3d,Slide } from 'vue-carousel-3d';
               )
 
               this.getallservices();
-                             
+                       
               
               /** ------------------------------------------------------------------- */
                 var username= Cookies.get('user')
@@ -431,7 +482,7 @@ import {Carousel3d,Slide } from 'vue-carousel-3d';
                 .catch(
                     console.log("errorrrr")    
                 )
-  
+     this.getrequsetorder();   
                /** ------------------------------------------------------------------- */   
 this.activity();
 // /    ------------------------------------------
@@ -571,21 +622,16 @@ this.activity();
                      if(res.data==true){
                                   this.$axios.post('/api/services/updateimage/'+this.form.id,formData  )
                                 .then(resp => {
-                                    if(resp.data===true){
+                            
                                         
-                                          this.activity();
+                                          
                                          this.$Toast.fire({
                                             icon: 'success',
                                             title: "successfly Edit"
                                         }) 
-                                    }else{
-                                           this.$Toast.fire({
-                                            icon: 'error',
-                                            title: 'Sorry but something wrong'
-                                        })
-                                    }
+                                    
                             
-                                
+                                this.activity();
                             console.log(resp);
                                 })
                  
@@ -710,7 +756,60 @@ this.activity();
                 console.log("active errore")
               )
 
-        }
+        },getrequsetorder(){
+              this.$axios.get('/api/ordersrequests/allconfirm/')
+              .then(res => {
+                  
+                     res.data.forEach((element,i) => {
+               
+                     console.log(" req",element)  ; 
+                        
+                           if(element.customer.imagepath===null){
+                             res.data[i].customer.imagepath='1.jpg';
+
+
+                    }else{
+                      res.data[i].customer.imagepath= element.customer.imagepath.split('\\')[element.customer.imagepath.split('\\').length - 2]+'/'+
+                        element.customer.imagepath.split('\\')[element.customer.imagepath.split('\\').length - 1];
+                    }
+             
+                    
+                  
+                      });
+                  this.orderconfirm=res.data;
+                 
+                  console.log(res.data,this.order,"orderrrrrrrrrrconfirmmmm");                 
+              })
+              .catch(
+                
+                console.log("active errore")
+              )
+
+
+        },confirm(id){
+ 
+        this.$axios.get('/api/ordersrequests/confirm/'+id)
+              .then(res => {
+                  if(res.data==true){
+                       this.order = this.order.filter(an => {
+                  return an.id != id
+                })
+                       this.$Toast.fire({
+                         icon: 'success',
+                         title: "successfly Add request services"
+                         }) 
+                         this.getrequsetorder();
+                  }
+                  
+                                 
+              })
+              .catch(
+                
+                console.log("active errore")
+              )
+        },
+
+
 /* eslint-disable */
 
 

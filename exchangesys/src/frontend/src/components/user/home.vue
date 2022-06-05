@@ -1,12 +1,7 @@
 <template>
 <div>
-    <!-- header area start -->
-
    
-    <!-- header area end -->
-    <!-- header area start -->
- 
-    <!-- header area end -->
+
  
     <main>
 
@@ -39,7 +34,7 @@
                                 </figure>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 offset-lg-1">
+                        <div class="col-lg-8 col-md-6 offset-lg-1">
                             <div class="profile-menu-wrapper">
                                 <div class="main-menu-inner header-top-navigation">
                                     <nav>
@@ -47,7 +42,9 @@
                                              <li v-on:click="call('services')"><router-link to="" >Services</router-link></li>
                                            <li v-on:click="call('work')"><router-link to="" >Work</router-link></li>
                                 
-                                            
+                                                <li v-on:click="call('test')"><router-link to="" >Busnies</router-link></li>
+                                            <li v-on:click="call('contract')"><router-link to="" >Contract</router-link></li>
+                                          
                                             <li v-on:click="call('friends')"><router-link to="" >Friends</router-link></li>
                                            
                                              <li v-on:click="call('setting')"><router-link to="" >Setting</router-link></li>
@@ -96,9 +93,12 @@
             <div class="about-author-details">
                 <router-view></router-view>
               <Setting v-if="message === 'setting'"></Setting>
-               <Services v-if="message === 'services'"></Services>
+               <Services v-if="message === 'services' || message ===null"></Services>
                <Friends v-if="message === 'friends'"></Friends>
                <Work v-if="message === 'work'"></Work>
+             <Busnies v-if="message === 'test'"></Busnies>
+             <Contract v-if="message ==='contract'" ></Contract>
+         
             </div>
             <!-- about author details start -->
         
@@ -124,6 +124,9 @@ import Setting from './setting.vue';
 import Services from './services.vue';
 import Friends from './friends.vue';
 import Work from './work.vue';
+import Busnies from './busnies.vue';
+import Contract from './contract.vue';
+
   export default {
 
     data() {
@@ -145,7 +148,10 @@ import Work from './work.vue';
     Setting,
     Services,
     Friends,
-    Work
+    Work,
+    Busnies,
+    Contract
+    
 },created(){
      
           this.$axios.get('/api/islog')
